@@ -35,7 +35,16 @@ const App: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/wordbook" element={<Wordbook Navbar={Navbar} />} />
         <Route path="/bookmark" element={<Bookmark Navbar={Navbar} />} />
-        <Route path="/quiz" element={<Quiz />} />
+        <Route
+          path="/quiz"
+          element={
+            <Quiz
+              Navbar={Navbar}
+              inputMainCss={inputMainCss}
+              inputInputCss={inputInputCss}
+            />
+          }
+        />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
