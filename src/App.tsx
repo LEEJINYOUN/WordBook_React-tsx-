@@ -45,7 +45,7 @@ const App: React.FC = () => {
             />
           }
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile Navbar={Navbar} />} />
       </Routes>
     </>
   );
