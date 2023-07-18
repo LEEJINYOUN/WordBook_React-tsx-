@@ -18,7 +18,7 @@ export default function Navbar() {
       <NavLink className={navCss} to="/quiz" onClick={newQuiz}>
         퀴즈
       </NavLink>
-      <NavLink className={`${navCss} rounded-tr-2xl`} to="/myPage">
+      <NavLink className={`${navCss} rounded-tr-2xl`} to="/profile">
         마이페이지
       </NavLink>
     </section>

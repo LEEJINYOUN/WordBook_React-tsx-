@@ -6,8 +6,10 @@ import Wordbook from "./routes/Wordbook";
 import Home from "./routes/Home";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
+import Navbar from "./components/Navbar";
 
 export type cssType = string;
+export type navbarType = any;
 
 const App: React.FC = () => {
   const inputMainCss: cssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
@@ -31,7 +33,7 @@ const App: React.FC = () => {
           }
         />
         <Route path="/home" element={<Home />} />
-        <Route path="/wordbook" element={<Wordbook />} />
+        <Route path="/wordbook" element={<Wordbook Navbar={Navbar} />} />
         <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/profile" element={<Profile />} />
