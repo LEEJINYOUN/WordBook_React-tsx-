@@ -21,7 +21,7 @@ export default function Home() {
             퀴즈
           </NavLink>
           <NavLink className={navCss} to="/profile">
-            마이페이지
+            프로필
           </NavLink>
         </main>
       </div>

@@ -19,7 +19,7 @@ export default function Navbar() {
         퀴즈
       </NavLink>
       <NavLink className={`${navCss} rounded-tr-2xl`} to="/profile">
-        마이페이지
+        프로필
       </NavLink>
     </section>
   );

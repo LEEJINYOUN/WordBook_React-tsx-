@@ -22,6 +22,9 @@ const App: React.FC = () => {
   const inputMainCss: cssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
   const inputInputCss: cssType = `my-3 border border-gray-300`;
   const [user, setUser] = useState<userInfoType | null>(null);
+  const localStore = localStorage.getItem("userInfo");
+  const LocalData: userInfoType = localStore && JSON.parse(localStore);
+
   useEffect(() => {
     if (localStorage.length !== 0) {
       const localStore = localStorage.getItem("userInfo");
@@ -65,7 +68,12 @@ const App: React.FC = () => {
             />
           }
         />
-        <Route path="/profile" element={<Profile Navbar={Navbar} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile Navbar={Navbar} LocalData={LocalData} setUser={setUser} />
+          }
+        />
       </Routes>
     </>
   );
