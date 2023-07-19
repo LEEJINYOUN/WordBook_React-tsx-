@@ -4,10 +4,9 @@ export default {
   type: 'document',
   fields: [
     {
-      title: 'Author',
-      name: 'author',
-      type: 'reference',
-      to: [{type: 'user'}],
+      title: 'Writer',
+      name: 'writer',
+      type: 'string',
     },
     {
       title: 'EnWord',
@@ -32,15 +31,15 @@ export default {
   ],
   preview: {
     select: {
-      authorName: 'author.name',
+      writerName: 'writer',
       enWord: 'enWord',
       krWord: 'krWord',
     },
     prepare(selection) {
-      const {authorName, enWord, krWord} = selection
+      const {writerName, enWord, krWord} = selection
       return {
         title: `${enWord} (${krWord})`,
-        subtitle: authorName,
+        subtitle: writerName,
       }
     },
   },

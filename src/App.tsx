@@ -56,7 +56,10 @@ const App: React.FC = () => {
           }
         />
         <Route path="/home" element={<Home />} />
-        <Route path="/wordbook" element={<Wordbook Navbar={Navbar} />} />
+        <Route
+          path="/wordbook"
+          element={<Wordbook Navbar={Navbar} LocalData={LocalData} />}
+        />
         <Route path="/bookmark" element={<Bookmark Navbar={Navbar} />} />
         <Route
           path="/quiz"

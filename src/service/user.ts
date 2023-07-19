@@ -20,6 +20,37 @@ type AuthGetLoginType = {
   setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
 };
 
+type WordCheckType = {
+  writer: string | undefined;
+  enWord: string;
+  setEnWord: React.Dispatch<React.SetStateAction<string>>;
+  krWord: string;
+  setKrWord: React.Dispatch<React.SetStateAction<string>>;
+  bookmark: boolean;
+  today: object;
+};
+
+type addWordType = {
+  writer: string | undefined;
+  enWord: string;
+  krWord: string;
+  bookmark: boolean;
+  today: object;
+};
+
+export type getWordsType = {
+  writer: string;
+  enWord: string;
+  krWord: string;
+  bookmark: boolean;
+  today: string;
+};
+
+type getType = {
+  writer: string | undefined;
+  setGetWords: getWordsType[];
+};
+
 export async function addUser({
   email,
   nickname,
@@ -87,4 +118,63 @@ export async function emailLogin({ email, password, setUser }: AuthLoginType) {
         ? alert("비밀번호가 다릅니다")
         : getEmailLogin({ email, setUser })
     );
+}
+
+export async function addWord({
+  writer,
+  enWord,
+  krWord,
+  bookmark,
+  today,
+}: addWordType) {
+  return client
+    .createIfNotExists({
+      _id: uuidv4(),
+      _type: "word",
+      writer,
+      enWord,
+      krWord,
+      bookmark,
+      today,
+    })
+    .then(() => {
+      window.location.reload();
+    });
+}
+
+export async function wordCheck({
+  writer,
+  enWord,
+  setEnWord,
+  krWord,
+  setKrWord,
+  bookmark,
+  today,
+}: WordCheckType) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}" && enWord == "${enWord}"]`
+    )
+    .then((res) =>
+      res[0] !== undefined
+        ? alert("이미 등록된 단어입니다")
+        : addWord({ writer, enWord, krWord, bookmark, today })
+    );
+}
+
+export async function getWordList({
+  writer,
+  setGetWords,
+}: {
+  writer: string | undefined;
+  setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
+}) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}"]
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
 }
