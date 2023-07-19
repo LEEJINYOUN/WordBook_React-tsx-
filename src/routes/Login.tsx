@@ -6,16 +6,28 @@ import { cssType } from "../App";
 export type Props = {
   inputMainCss: cssType;
   inputInputCss: cssType;
+  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
 };
 
-export default function Login({ inputMainCss, inputInputCss }: Props) {
+export type userInfoType = {
+  id: string;
+  email: string;
+  nickname: string;
+  name: string;
+};
+
+export default function Login({ inputMainCss, inputInputCss, setUser }: Props) {
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[600px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
         <div className="h-[20%] font-bold text-3xl sm:text-4xl flex justify-center items-center">
           로그인
         </div>
-        <LoginForm inputMainCss={inputMainCss} inputInputCss={inputInputCss} />
+        <LoginForm
+          inputMainCss={inputMainCss}
+          inputInputCss={inputInputCss}
+          setUser={setUser}
+        />
         <div className="h-[15%] flex flex-row justify-center items-center">
           <span className="text-base sm:text-lg mx-2">회원이 아닌가요?</span>
           <NavLink

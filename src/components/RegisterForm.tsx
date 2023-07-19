@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Props } from "../routes/Login";
+import { Props } from "../routes/Register";
 import { emailSignUpCheck } from "../service/user";
 
 export default function RegisterForm({ inputMainCss, inputInputCss }: Props) {
