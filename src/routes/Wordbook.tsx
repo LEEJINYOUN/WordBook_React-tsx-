@@ -3,13 +3,18 @@ import { navbarType } from "../App";
 import SearchForm from "../components/SearchForm";
 import { userInfoType } from "./Login";
 import AddWordModal from "../components/AddWordModal";
-import { getWordList } from "../service/user";
+import { getWordList, wordDelete } from "../service/user";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
 export type wordbookType = {
   Navbar: navbarType;
   LocalData: userInfoType | null;
+};
+
+export type deleteType = {
+  e: React.MouseEvent<SVGElement, MouseEvent>;
+  id: string;
 };
 
 export default function Wordbook({ Navbar, LocalData }: wordbookType) {
@@ -74,6 +79,7 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
               <BsFillTrashFill
                 className="cursor-pointer duration-200 hover:text-red-500 "
                 id={item._id}
+                onClick={(e) => onDelete(e, item._id)}
               />
             </div>
           </div>
@@ -85,6 +91,14 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
     setAddModal((prev) => !prev);
     setEnWord("");
     setKrWord("");
+  };
+
+  const onDelete = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordDelete({ id });
   };
 
   useEffect(() => {

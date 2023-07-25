@@ -178,3 +178,9 @@ export async function getWordList({
       setGetWords(res);
     });
 }
+
+export async function wordDelete({ id }: { id: string }) {
+  return client
+    .delete({ query: `*[_type == "word" && _id == "${id}"]` })
+    .then(() => window.location.reload());
+}
