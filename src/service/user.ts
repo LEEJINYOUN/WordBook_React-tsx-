@@ -174,13 +174,29 @@ export async function getWordList({
     });
 }
 
+export async function getWordListBookmark({
+  writer,
+  setGetWords,
+}: {
+  writer: string | undefined;
+  setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
+}) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}" && bookmark == true]
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
+}
+
 export async function wordBookmarkTrue({ id }: { id: string }) {
   return client
     .patch(id)
     .set({ bookmark: true })
     .commit()
     .then(() => {
-      alert("즐겨찾기에 추가했습니다.");
       window.location.reload();
     });
 }
@@ -191,7 +207,6 @@ export async function wordBookmarkFalse({ id }: { id: string }) {
     .set({ bookmark: false })
     .commit()
     .then(() => {
-      alert("즐겨찾기에서 삭제했습니다.");
       window.location.reload();
     });
 }
