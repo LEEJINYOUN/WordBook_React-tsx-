@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   getRecordDateMatched: Array<any>;
   getRecordDateNotMatched: Array<any>;

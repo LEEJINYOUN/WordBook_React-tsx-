@@ -1,5 +1,3 @@
-import React from "react";
-
 type itemType = {
   _id: string;
   today: string;

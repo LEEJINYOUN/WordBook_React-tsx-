@@ -1,31 +1,26 @@
 import { client } from "./sanity";
 import { v4 as uuidv4 } from "uuid";
 
-type addWordType = {
+interface wordObjectType {
   writer: string | undefined;
   enWord: string;
   krWord: string;
   bookmark: boolean;
   today: object;
-};
+}
 
-type WordCheckType = {
-  writer: string | undefined;
-  enWord: string;
+interface WordCheckType extends wordObjectType {
   setEnWord: React.Dispatch<React.SetStateAction<string>>;
-  krWord: string;
   setKrWord: React.Dispatch<React.SetStateAction<string>>;
-  bookmark: boolean;
-  today: object;
-};
+}
 
-export async function addWord({
+export async function addWordActive({
   writer,
   enWord,
   krWord,
   bookmark,
   today,
-}: addWordType) {
+}: wordObjectType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),
@@ -41,7 +36,7 @@ export async function addWord({
     });
 }
 
-export async function wordCheck({
+export async function wordCheckActive({
   writer,
   enWord,
   krWord,
@@ -55,11 +50,11 @@ export async function wordCheck({
     .then((res) =>
       res[0] !== undefined
         ? alert("이미 등록된 단어입니다")
-        : addWord({ writer, enWord, krWord, bookmark, today })
+        : addWordActive({ writer, enWord, krWord, bookmark, today })
     );
 }
 
-export async function getWordList({
+export async function getWordsListActive({
   writer,
   setGetWords,
 }: {
@@ -93,7 +88,7 @@ export async function getWordListBookmark({
     });
 }
 
-export async function wordBookmarkTrue({ id }: { id: string }) {
+export async function wordBookmarkTrueActive({ id }: { id: string }) {
   return client
     .patch(id)
     .set({ bookmark: true })
@@ -103,7 +98,7 @@ export async function wordBookmarkTrue({ id }: { id: string }) {
     });
 }
 
-export async function wordBookmarkFalse({ id }: { id: string }) {
+export async function wordBookmarkFalseActive({ id }: { id: string }) {
   return client
     .patch(id)
     .set({ bookmark: false })
@@ -113,24 +108,24 @@ export async function wordBookmarkFalse({ id }: { id: string }) {
     });
 }
 
-export async function wordBookmarkCheck({ id }: { id: string }) {
+export async function wordBookmarkCheckActive({ id }: { id: string }) {
   return client.fetch(`*[_type == "word" && _id == "${id}"]`).then((res) => {
     let isBookmark = res[0].bookmark;
     if (isBookmark === false) {
-      wordBookmarkTrue({ id });
+      wordBookmarkTrueActive({ id });
     } else {
-      wordBookmarkFalse({ id });
+      wordBookmarkFalseActive({ id });
     }
   });
 }
 
-export async function wordDelete({ id }: { id: string }) {
+export async function wordDeleteActive({ id }: { id: string }) {
   return client
     .delete({ query: `*[_type == "word" && _id == "${id}"]` })
     .then(() => window.location.reload());
 }
 
-export async function getRecordsList({
+export async function getRecordsListActive({
   writer,
   setGetRecords,
 }: {

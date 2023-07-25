@@ -3,8 +3,8 @@ import SearchForm from "../components/SearchForm";
 import { wordbookType } from "./Wordbook";
 import {
   getWordListBookmark,
-  wordBookmarkCheck,
-  wordDelete,
+  wordBookmarkCheckActive,
+  wordDeleteActive,
 } from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -20,6 +20,22 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
     if (name === "search") {
       setSearchWord(value);
     }
+  };
+
+  const onBookmark = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordBookmarkCheckActive({ id });
+  };
+
+  const onDelete = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordDeleteActive({ id });
   };
 
   const filterWords = getWords
@@ -75,22 +91,6 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
         </div>
       );
     });
-
-  const onBookmark = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
-    e.preventDefault();
-    wordBookmarkCheck({ id });
-  };
-
-  const onDelete = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
-    e.preventDefault();
-    wordDelete({ id });
-  };
 
   useEffect(() => {
     getWordListBookmark({ writer, setGetWords });

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Props } from "../routes/Register";
-import { emailSignUpCheck } from "../service/user";
+import { emailSignUpCheckActive } from "../service/user";
 
 export default function RegisterForm({ inputMainCss, inputInputCss }: Props) {
   const [userEmail, setUserEmail] = useState<string>("");
@@ -25,7 +25,7 @@ export default function RegisterForm({ inputMainCss, inputInputCss }: Props) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailSignUpCheck({
+    emailSignUpCheckActive({
       email: userEmail,
       nickname: userNickname,
       name: userName,

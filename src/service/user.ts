@@ -9,18 +9,16 @@ type AuthCreateType = {
   password: string;
 };
 
-type AuthLoginType = {
+interface AuthGetLoginType {
   email: string;
+  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
+}
+
+interface AuthLoginType extends AuthGetLoginType {
   password: string;
-  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
-};
+}
 
-type AuthGetLoginType = {
-  email: string;
-  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
-};
-
-export async function addUser({
+export async function addUserActive({
   email,
   nickname,
   name,
@@ -41,7 +39,7 @@ export async function addUser({
     });
 }
 
-export async function emailSignUpCheck({
+export async function emailSignUpCheckActive({
   email,
   nickname,
   name,
@@ -52,7 +50,7 @@ export async function emailSignUpCheck({
     .then((res) =>
       res !== null
         ? alert("존재하는 아이디입니다.")
-        : addUser({
+        : addUserActive({
             email,
             nickname,
             name,
@@ -61,7 +59,10 @@ export async function emailSignUpCheck({
     );
 }
 
-export async function getEmailLogin({ email, setUser }: AuthGetLoginType) {
+export async function getEmailLoginActive({
+  email,
+  setUser,
+}: AuthGetLoginType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
     .then((res) => {
@@ -77,7 +78,11 @@ export async function getEmailLogin({ email, setUser }: AuthGetLoginType) {
     });
 }
 
-export async function emailLogin({ email, password, setUser }: AuthLoginType) {
+export async function emailLoginActive({
+  email,
+  password,
+  setUser,
+}: AuthLoginType) {
   return client
     .fetch(
       `*[_type == "user" && email == "${email}"][0]{"password" : password == "${password}"}`
@@ -85,6 +90,6 @@ export async function emailLogin({ email, password, setUser }: AuthLoginType) {
     .then((res) =>
       res.password === false
         ? alert("비밀번호가 다릅니다")
-        : getEmailLogin({ email, setUser })
+        : getEmailLoginActive({ email, setUser })
     );
 }

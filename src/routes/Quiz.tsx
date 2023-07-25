@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { cssType, navbarType } from "../App";
 import QuizMainForm from "../components/QuizMainForm";
-import { getRecordsList, getWordList } from "../service/word";
+import { getRecordsListActive, getWordsListActive } from "../service/word";
 import { userInfoType } from "./Login";
 import RecordsReadModal from "../components/RecordsReadModal";
 import QuizWaitForm from "../components/QuizWaitForm";
 import UseModal from "../components/UseModal";
 import QuizForm from "../components/QuizForm";
-import { addResultPush, dateRecord, quizStop } from "../service/quiz";
+import {
+  resultPushActive,
+  dateRecordActive,
+  quizStopActive,
+} from "../service/quiz";
 import { v4 as uuidv4 } from "uuid";
 import QuizEndModal from "../components/QuizEndModal";
 import CurrentRecordModal from "../components/CurrentRecordModal";
@@ -93,7 +97,7 @@ export default function Quiz({
     matchedArr,
     NotMatchedArr,
   }: answersType) => {
-    addResultPush({ matchedArr, NotMatchedArr, today, writer });
+    resultPushActive({ matchedArr, NotMatchedArr, today, writer });
   };
 
   const matchedAnswer = () => {
@@ -175,7 +179,7 @@ export default function Quiz({
   };
 
   const quizStopBtn = async () => {
-    quizStop({ today, writer, matchedArr, NotMatchedArr, setQuizEnd });
+    quizStopActive({ today, writer, matchedArr, NotMatchedArr, setQuizEnd });
   };
 
   const onCurrentRecord = () => {
@@ -196,7 +200,7 @@ export default function Quiz({
     id: string
   ) => {
     e.preventDefault();
-    dateRecord({
+    dateRecordActive({
       id,
       setGetRecordDateMatched,
       setGetRecordDateNotMatched,
@@ -209,8 +213,8 @@ export default function Quiz({
   };
 
   useEffect(() => {
-    getWordList({ writer, setGetWords });
-    getRecordsList({ writer, setGetRecords });
+    getWordsListActive({ writer, setGetWords });
+    getRecordsListActive({ writer, setGetRecords });
   }, []);
 
   return (

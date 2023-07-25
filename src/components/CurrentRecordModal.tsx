@@ -1,4 +1,3 @@
-import React from "react";
 import { objectType } from "../routes/Quiz";
 
 type Props = {

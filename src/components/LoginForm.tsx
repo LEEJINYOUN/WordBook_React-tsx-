@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Props } from "../routes/Login";
-import { emailLogin } from "../service/user";
+import { emailLoginActive } from "../service/user";
 
 export default function LoginForm({
   inputMainCss,
@@ -21,7 +21,7 @@ export default function LoginForm({
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailLogin({
+    emailLoginActive({
       email: userEmail,
       password: String(userPw),
       setUser,

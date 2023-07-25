@@ -1,4 +1,3 @@
-import React from "react";
 import { userInfoType } from "../App";
 
 export type profileType = {

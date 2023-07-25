@@ -3,7 +3,11 @@ import { navbarType } from "../App";
 import SearchForm from "../components/SearchForm";
 import { userInfoType } from "./Login";
 import AddWordModal from "../components/AddWordModal";
-import { getWordList, wordBookmarkCheck, wordDelete } from "../service/word";
+import {
+  getWordsListActive,
+  wordBookmarkCheckActive,
+  wordDeleteActive,
+} from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
@@ -33,6 +37,28 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
     if (name === "search") {
       setSearchWord(value);
     }
+  };
+
+  const onAddModal = () => {
+    setAddModal((prev) => !prev);
+    setEnWord("");
+    setKrWord("");
+  };
+
+  const onBookmark = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordBookmarkCheckActive({ id });
+  };
+
+  const onDelete = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordDeleteActive({ id });
   };
 
   const filterWords = getWords
@@ -89,30 +115,8 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
       );
     });
 
-  const onAddModal = () => {
-    setAddModal((prev) => !prev);
-    setEnWord("");
-    setKrWord("");
-  };
-
-  const onBookmark = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
-    e.preventDefault();
-    wordBookmarkCheck({ id });
-  };
-
-  const onDelete = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
-    e.preventDefault();
-    wordDelete({ id });
-  };
-
   useEffect(() => {
-    getWordList({ writer, setGetWords });
+    getWordsListActive({ writer, setGetWords });
   }, []);
 
   return (
