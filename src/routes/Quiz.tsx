@@ -4,6 +4,8 @@ import QuizMainForm from "../components/QuizMainForm";
 import { getWordList } from "../service/word";
 import { userInfoType } from "./Login";
 import RecordsReadModal from "../components/RecordsReadModal";
+import QuizWaitForm from "../components/QuizWaitForm";
+import UseModal from "../components/UseModal";
 type Props = {
   Navbar: navbarType;
   LocalData: userInfoType | null;
@@ -61,16 +63,9 @@ export default function Quiz({
               booleanChange={booleanChange}
               onRecordsRead={onRecordsRead}
             />
-          ) : // <QuizMainForm
-          //   WORDS={WORDS}
-          //   getWords={getWords}
-          //   booleanChange={booleanChange}
-          //   onRecordsRead={onRecordsRead}
-          // />
-          btnStart === false ? (
-            <div>2</div>
+          ) : btnStart === false ? (
+            <QuizWaitForm booleanChange={booleanChange} />
           ) : (
-            // <QuizWaitForm booleanChange={booleanChange} />
             <div>3</div>
             // <QuizForm
             //   btnStart={btnStart}
@@ -96,6 +91,7 @@ export default function Quiz({
             />
           )}
         </main>
+        {btnUse === true && <UseModal booleanChange={booleanChange} />}
       </div>
     </section>
   );
