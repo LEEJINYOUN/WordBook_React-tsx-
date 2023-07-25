@@ -1,3 +1,4 @@
 import user from './user'
 import word from './word'
-export const schemaTypes = [user, word]
+import quiz from './quiz'
+export const schemaTypes = [user, word, quiz]

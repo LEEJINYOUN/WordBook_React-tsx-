@@ -129,3 +129,20 @@ export async function wordDelete({ id }: { id: string }) {
     .delete({ query: `*[_type == "word" && _id == "${id}"]` })
     .then(() => window.location.reload());
 }
+
+export async function getRecordsList({
+  writer,
+  setGetRecords,
+}: {
+  writer: string | undefined;
+  setGetRecords: React.Dispatch<React.SetStateAction<any[]>>;
+}) {
+  return client
+    .fetch(
+      `*[_type == "quiz" && writer == "${writer}"]
+    `
+    )
+    .then((res) => {
+      setGetRecords(res);
+    });
+}

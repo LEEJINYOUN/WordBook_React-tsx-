@@ -1,10 +1,21 @@
 import React from "react";
 
+type itemType = {
+  _id: string;
+  today: string;
+};
+
 type Props = {
+  getRecords: itemType[];
+  onDateRecord: any;
   onRecordsReadClose: () => void;
 };
 
-export default function RecordsReadModal({ onRecordsReadClose }: Props) {
+export default function RecordsReadModal({
+  getRecords,
+  onDateRecord,
+  onRecordsReadClose,
+}: Props) {
   return (
     <div className="z-110 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[70%] rounded-2xl">
@@ -14,17 +25,17 @@ export default function RecordsReadModal({ onRecordsReadClose }: Props) {
           </div>
         </div>
         <div className="h-[80%] border-b-2 border-gray-200 overflow-y-auto scrollbar-hide">
-          {/* {getRecords.map((item, key) => (
-        <div key={key} className="w-[70%] m-auto">
-          <button
-            id={item._id}
-            className="bg-blue-300 mt-4 w-full h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
-            onClick={(e) => onDateRecord(e, item._id)}
-          >
-            {item.today}
-          </button>
-        </div>
-      ))} */}
+          {getRecords.map((item, key) => (
+            <div key={key} className="w-[70%] m-auto">
+              <button
+                id={item._id}
+                className="bg-blue-300 mt-4 w-full h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
+                onClick={(e) => onDateRecord(e, item._id)}
+              >
+                {item.today}
+              </button>
+            </div>
+          ))}
         </div>
         <div className="h-[10%] flex justify-center items-center">
           <button
