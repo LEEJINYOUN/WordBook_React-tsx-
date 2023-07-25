@@ -69,6 +69,7 @@ const App: React.FC = () => {
           element={
             <Quiz
               Navbar={Navbar}
+              LocalData={LocalData}
               inputMainCss={inputMainCss}
               inputInputCss={inputInputCss}
             />
