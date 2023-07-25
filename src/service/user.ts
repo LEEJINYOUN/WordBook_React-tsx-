@@ -46,11 +46,6 @@ export type getWordsType = {
   today: string;
 };
 
-type getType = {
-  writer: string | undefined;
-  setGetWords: getWordsType[];
-};
-
 export async function addUser({
   email,
   nickname,
@@ -177,6 +172,39 @@ export async function getWordList({
     .then((res) => {
       setGetWords(res);
     });
+}
+
+export async function wordBookmarkTrue({ id }: { id: string }) {
+  return client
+    .patch(id)
+    .set({ bookmark: true })
+    .commit()
+    .then(() => {
+      alert("즐겨찾기에 추가했습니다.");
+      window.location.reload();
+    });
+}
+
+export async function wordBookmarkFalse({ id }: { id: string }) {
+  return client
+    .patch(id)
+    .set({ bookmark: false })
+    .commit()
+    .then(() => {
+      alert("즐겨찾기에서 삭제했습니다.");
+      window.location.reload();
+    });
+}
+
+export async function wordBookmarkCheck({ id }: { id: string }) {
+  return client.fetch(`*[_type == "word" && _id == "${id}"]`).then((res) => {
+    let isBookmark = res[0].bookmark;
+    if (isBookmark === false) {
+      wordBookmarkTrue({ id });
+    } else {
+      wordBookmarkFalse({ id });
+    }
+  });
 }
 
 export async function wordDelete({ id }: { id: string }) {

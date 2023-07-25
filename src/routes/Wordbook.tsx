@@ -3,7 +3,7 @@ import { navbarType } from "../App";
 import SearchForm from "../components/SearchForm";
 import { userInfoType } from "./Login";
 import AddWordModal from "../components/AddWordModal";
-import { getWordList, wordDelete } from "../service/user";
+import { getWordList, wordBookmarkCheck, wordDelete } from "../service/user";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
@@ -67,11 +67,13 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
                 <AiFillStar
                   className="text-lg cursor-pointer duration-200 hover:text-yellow-300"
                   id={item._id}
+                  onClick={(e) => onBookmark(e, item._id)}
                 />
               ) : (
                 <AiFillStar
                   className="text-lg cursor-pointer text-yellow-300"
                   id={item._id}
+                  onClick={(e) => onBookmark(e, item._id)}
                 />
               )}
             </div>
@@ -91,6 +93,14 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
     setAddModal((prev) => !prev);
     setEnWord("");
     setKrWord("");
+  };
+
+  const onBookmark = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    wordBookmarkCheck({ id });
   };
 
   const onDelete = async (
