@@ -63,7 +63,7 @@ export async function getWordsListActive({
 }) {
   return client
     .fetch(
-      `*[_type == "word" && writer == "${writer}"]
+      `*[_type == "word" && writer == "${writer}"] | order(today asc)
     `
     )
     .then((res) => {
@@ -80,7 +80,7 @@ export async function getWordListBookmark({
 }) {
   return client
     .fetch(
-      `*[_type == "word" && writer == "${writer}" && bookmark == true]
+      `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(today asc)
     `
     )
     .then((res) => {
@@ -134,7 +134,7 @@ export async function getRecordsListActive({
 }) {
   return client
     .fetch(
-      `*[_type == "quiz" && writer == "${writer}"]
+      `*[_type == "quiz" && writer == "${writer}"] | order(today desc)
     `
     )
     .then((res) => {
