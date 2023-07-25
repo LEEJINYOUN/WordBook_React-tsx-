@@ -5,13 +5,12 @@ import {
   getWordListBookmark,
   wordBookmarkCheck,
   wordDelete,
-} from "../service/user";
+} from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
 export default function Bookmark({ Navbar, LocalData }: wordbookType) {
   const writer = LocalData?.email;
-  const today = new Date();
   const [searchWord, setSearchWord] = useState<string>("");
   const [getWords, setGetWords] = useState<Array<any>>([]);
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {

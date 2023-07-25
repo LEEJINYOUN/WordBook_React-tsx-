@@ -3,7 +3,7 @@ import { navbarType } from "../App";
 import SearchForm from "../components/SearchForm";
 import { userInfoType } from "./Login";
 import AddWordModal from "../components/AddWordModal";
-import { getWordList, wordBookmarkCheck, wordDelete } from "../service/user";
+import { getWordList, wordBookmarkCheck, wordDelete } from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
