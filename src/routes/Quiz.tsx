@@ -71,9 +71,12 @@ export default function Quiz({
     let id = e.target.id;
     if (id === "match" || id === "select") {
       setBtnMatch((prev) => !prev);
-    } else if (id === "start" || id === "restart") {
+    } else if (id === "start") {
       setBtnStart((prev) => !prev);
       onShuffle();
+      INDEX = 0;
+      matchedArr.length = 0;
+      NotMatchedArr.length = 0;
     } else if (id === "use") {
       setBtnUse((prev) => !prev);
     }
