@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
 import { wordbookType } from "./Wordbook";
 import {
@@ -8,6 +8,8 @@ import {
 } from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useQuery } from "react-query";
+import spinner from "../assets/spinner.gif";
 
 export default function Bookmark({ Navbar, LocalData }: wordbookType) {
   const writer = LocalData?.email;
@@ -92,20 +94,29 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
       );
     });
 
-  useEffect(() => {
+  const { isLoading } = useQuery("getWordBookmark", () => {
     getWordListBookmark({ writer, setGetWords });
-  }, []);
+  });
 
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
         <Navbar />
-        <main className="h-[90%] flex flex-col">
-          <SearchForm searchWord={searchWord} onSearchChange={onSearchChange} />
-          <div className="mx-auto w-full h-[90%] overflow-y-auto scrollbar-hide">
-            {filterWords}
-          </div>
-        </main>
+        {isLoading === true ? (
+          <span className="flex justify-center w-full h-[90%] items-center text-2xl font-semibold">
+            <img src={spinner} alt="로딩중" width="150px" />
+          </span>
+        ) : (
+          <main className="h-[90%] flex flex-col">
+            <SearchForm
+              searchWord={searchWord}
+              onSearchChange={onSearchChange}
+            />
+            <div className="mx-auto w-full h-[90%] overflow-y-auto scrollbar-hide">
+              {filterWords}
+            </div>
+          </main>
+        )}
       </div>
     </section>
   );

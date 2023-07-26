@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Profile from "./routes/Profile";
 import Quiz from "./routes/Quiz";
@@ -8,6 +8,7 @@ import Home from "./routes/Home";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
 import Navbar from "./components/Navbar";
+import { useQuery } from "react-query";
 
 export type cssType = string;
 export type navbarType = any;
@@ -24,14 +25,14 @@ const App: React.FC = () => {
   const [user, setUser] = useState<userInfoType | null>(null);
   const localStore = localStorage.getItem("userInfo");
   const LocalData: userInfoType = localStore && JSON.parse(localStore);
-
-  useEffect(() => {
+  const getUserInfo = async () => {
     if (localStorage.length !== 0) {
       const localStore = localStorage.getItem("userInfo");
       const getLocalData: userInfoType = localStore && JSON.parse(localStore);
       setUser(getLocalData);
     }
-  }, [setUser]);
+  };
+  const { data } = useQuery("userInfo", getUserInfo);
 
   return (
     <>

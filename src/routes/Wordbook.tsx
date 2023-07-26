@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { navbarType } from "../App";
 import SearchForm from "../components/SearchForm";
 import { userInfoType } from "./Login";
@@ -10,6 +10,8 @@ import {
 } from "../service/word";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useQuery } from "react-query";
+import spinner from "../assets/spinner.gif";
 
 export type wordbookType = {
   Navbar: navbarType;
@@ -115,39 +117,48 @@ export default function Wordbook({ Navbar, LocalData }: wordbookType) {
       );
     });
 
-  useEffect(() => {
+  const { isLoading } = useQuery("getWords", () => {
     getWordsListActive({ writer, setGetWords });
-  }, []);
+  });
 
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
         <Navbar />
-        <main className="h-[90%] flex flex-col">
-          <SearchForm searchWord={searchWord} onSearchChange={onSearchChange} />
-          <div className="mx-auto w-full h-[80%] overflow-y-auto scrollbar-hide">
-            {filterWords}
-          </div>
-          <div className="mx-auto w-full h-[10%] flex justify-center items-center">
-            <button
-              className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
-              onClick={onAddModal}
-            >
-              단어 등록
-            </button>
-          </div>
-          {addModal === true && (
-            <AddWordModal
-              onAddModal={onAddModal}
-              writer={writer}
-              today={today}
-              enWord={enWord}
-              setEnWord={setEnWord}
-              krWord={krWord}
-              setKrWord={setKrWord}
+        {isLoading === true ? (
+          <span className="flex justify-center w-full h-[90%] items-center text-2xl font-semibold">
+            <img src={spinner} alt="로딩중" width="150px" />
+          </span>
+        ) : (
+          <main className="h-[90%] flex flex-col">
+            <SearchForm
+              searchWord={searchWord}
+              onSearchChange={onSearchChange}
             />
-          )}
-        </main>
+            <div className="mx-auto w-full h-[80%] overflow-y-auto scrollbar-hide">
+              {filterWords}
+            </div>
+            <div className="mx-auto w-full h-[10%] flex justify-center items-center">
+              <button
+                className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
+                onClick={onAddModal}
+              >
+                단어 등록
+              </button>
+            </div>
+            {addModal === true && (
+              <AddWordModal
+                onAddModal={onAddModal}
+                writer={writer}
+                today={today}
+                enWord={enWord}
+                setEnWord={setEnWord}
+                krWord={krWord}
+                setKrWord={setKrWord}
+              />
+            )}
+          </main>
+        )}
       </div>
     </section>
   );

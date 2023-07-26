@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { cssType, navbarType } from "../App";
 import QuizMainForm from "../components/QuizMainForm";
 import { getRecordsListActive, getWordsListActive } from "../service/word";
@@ -16,6 +16,9 @@ import { v4 as uuidv4 } from "uuid";
 import QuizEndModal from "../components/QuizEndModal";
 import CurrentRecordModal from "../components/CurrentRecordModal";
 import RecordDateModal from "../components/RecordDateModal";
+import { useQuery } from "react-query";
+import spinner from "../assets/spinner.gif";
+
 type Props = {
   Navbar: navbarType;
   LocalData: userInfoType | null;
@@ -212,71 +215,79 @@ export default function Quiz({
     setRecordsRead(false);
   };
 
-  useEffect(() => {
+  const { isLoading } = useQuery("getLists", () => {
     getWordsListActive({ writer, setGetWords });
     getRecordsListActive({ writer, setGetRecords });
-  }, []);
+  });
 
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
         <Navbar />
-        <main className="h-[90%] flex flex-col justify-center items-center">
-          {btnMatch === false ? (
-            <QuizMainForm
-              WORDS={WORDS}
-              getWords={getWords}
-              booleanChange={booleanChange}
-              onRecordsRead={onRecordsRead}
-            />
-          ) : btnStart === false ? (
-            <QuizWaitForm booleanChange={booleanChange} />
-          ) : (
-            <QuizForm
-              btnStart={btnStart}
-              INDEX={INDEX}
-              question={question}
-              matched={matched}
-              notMatched={notMatched}
-              onSubmit={onSubmit}
-              inputMainCss={inputMainCss}
-              inputInputCss={inputInputCss}
-              answer={answer}
-              setAnswer={setAnswer}
-              quizStopBtn={quizStopBtn}
-              booleanChange={booleanChange}
-            />
-          )}
-        </main>
-        {btnUse === true && <UseModal booleanChange={booleanChange} />}
-        {quizEnd === true && (
-          <QuizEndModal
-            getWords={getWords}
-            matchedArr={matchedArr}
-            NotMatchedArr={NotMatchedArr}
-            onCurrentRecord={onCurrentRecord}
-          />
-        )}
-        {currentRecord === true && (
-          <CurrentRecordModal
-            matchedArr={matchedArr}
-            NotMatchedArr={NotMatchedArr}
-            onCurrentRecordClose={onCurrentRecordClose}
-          />
-        )}
-        {recordsRead === true && (
-          <RecordsReadModal
-            getRecords={getRecords}
-            onDateRecord={onDateRecord}
-            onRecordsReadClose={onRecordsReadClose}
-          />
-        )}
-        {getRecordDate === true && (
-          <RecordDateModal
-            getRecordDateMatched={getRecordDateMatched}
-            getRecordDateNotMatched={getRecordDateNotMatched}
-            onCurrentRecordClose={onCurrentRecordClose}
-          />
+        {isLoading === true ? (
+          <span className="flex justify-center w-full h-[90%] items-center text-2xl font-semibold">
+            <img src={spinner} alt="로딩중" width="150px" />
+          </span>
+        ) : (
+          <>
+            <main className="h-[90%] flex flex-col justify-center items-center">
+              {btnMatch === false ? (
+                <QuizMainForm
+                  WORDS={WORDS}
+                  getWords={getWords}
+                  booleanChange={booleanChange}
+                  onRecordsRead={onRecordsRead}
+                />
+              ) : btnStart === false ? (
+                <QuizWaitForm booleanChange={booleanChange} />
+              ) : (
+                <QuizForm
+                  btnStart={btnStart}
+                  INDEX={INDEX}
+                  question={question}
+                  matched={matched}
+                  notMatched={notMatched}
+                  onSubmit={onSubmit}
+                  inputMainCss={inputMainCss}
+                  inputInputCss={inputInputCss}
+                  answer={answer}
+                  setAnswer={setAnswer}
+                  quizStopBtn={quizStopBtn}
+                  booleanChange={booleanChange}
+                />
+              )}
+            </main>
+            {btnUse === true && <UseModal booleanChange={booleanChange} />}
+            {quizEnd === true && (
+              <QuizEndModal
+                getWords={getWords}
+                matchedArr={matchedArr}
+                NotMatchedArr={NotMatchedArr}
+                onCurrentRecord={onCurrentRecord}
+              />
+            )}
+            {currentRecord === true && (
+              <CurrentRecordModal
+                matchedArr={matchedArr}
+                NotMatchedArr={NotMatchedArr}
+                onCurrentRecordClose={onCurrentRecordClose}
+              />
+            )}
+            {recordsRead === true && (
+              <RecordsReadModal
+                getRecords={getRecords}
+                onDateRecord={onDateRecord}
+                onRecordsReadClose={onRecordsReadClose}
+              />
+            )}
+            {getRecordDate === true && (
+              <RecordDateModal
+                getRecordDateMatched={getRecordDateMatched}
+                getRecordDateNotMatched={getRecordDateNotMatched}
+                onCurrentRecordClose={onCurrentRecordClose}
+              />
+            )}
+          </>
         )}
       </div>
     </section>
