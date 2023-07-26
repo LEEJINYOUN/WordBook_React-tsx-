@@ -1,19 +1,10 @@
-type itemType = {
-  _id: string;
-  today: string;
-};
-
-type Props = {
-  getRecords: itemType[];
-  onDateRecord: any;
-  onRecordsReadClose: () => void;
-};
+import { RecordsReadModalType } from "./TypeAlias";
 
 export default function RecordsReadModal({
   getRecords,
   onDateRecord,
   onRecordsReadClose,
-}: Props) {
+}: RecordsReadModalType) {
   return (
     <div className="z-110 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[70%] rounded-2xl">
@@ -28,7 +19,7 @@ export default function RecordsReadModal({
               <button
                 id={item._id}
                 className="bg-blue-300 mt-4 w-full h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
-                onClick={(e) => onDateRecord(e, item._id)}
+                onClick={(e) => onDateRecord({ e, id: item._id })}
               >
                 {item.today}
               </button>

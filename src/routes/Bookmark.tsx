@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
-import { wordbookType } from "./Wordbook";
 import {
   getWordListBookmark,
   wordBookmarkCheckActive,
@@ -10,8 +9,9 @@ import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
+import { OnClickType, WordbookType } from "../components/TypeAlias";
 
-export default function Bookmark({ Navbar, LocalData }: wordbookType) {
+export default function Bookmark({ Navbar, LocalData }: WordbookType) {
   const writer = LocalData?.email;
   const [searchWord, setSearchWord] = useState<string>("");
   const [getWords, setGetWords] = useState<Array<any>>([]);
@@ -24,18 +24,12 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
     }
   };
 
-  const onBookmark = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
+  const onBookmark = async ({ e, id }: OnClickType) => {
     e.preventDefault();
     wordBookmarkCheckActive({ id });
   };
 
-  const onDelete = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
+  const onDelete = async ({ e, id }: OnClickType) => {
     e.preventDefault();
     wordDeleteActive({ id });
   };
@@ -72,13 +66,13 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
                 <AiFillStar
                   className="text-lg cursor-pointer duration-200 hover:text-yellow-300"
                   id={item._id}
-                  onClick={(e) => onBookmark(e, item._id)}
+                  onClick={(e) => onBookmark({ e, id: item._id })}
                 />
               ) : (
                 <AiFillStar
                   className="text-lg cursor-pointer text-yellow-300"
                   id={item._id}
-                  onClick={(e) => onBookmark(e, item._id)}
+                  onClick={(e) => onBookmark({ e, id: item._id })}
                 />
               )}
             </div>
@@ -86,7 +80,7 @@ export default function Bookmark({ Navbar, LocalData }: wordbookType) {
               <BsFillTrashFill
                 className="cursor-pointer duration-200 hover:text-red-500 "
                 id={item._id}
-                onClick={(e) => onDelete(e, item._id)}
+                onClick={(e) => onDelete({ e, id: item._id })}
               />
             </div>
           </div>

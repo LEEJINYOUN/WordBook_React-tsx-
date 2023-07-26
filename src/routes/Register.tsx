@@ -1,13 +1,11 @@
 import { NavLink } from "react-router-dom";
 import RegisterForm from "../components/RegisterForm";
-import { cssType } from "../App";
+import { RegisterType } from "../components/TypeAlias";
 
-export type Props = {
-  inputMainCss: cssType;
-  inputInputCss: cssType;
-};
-
-export default function Register({ inputMainCss, inputInputCss }: Props) {
+export default function Register({
+  inputMainCss,
+  inputInputCss,
+}: RegisterType) {
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[650px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">

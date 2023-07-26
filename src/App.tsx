@@ -9,26 +9,18 @@ import Register from "./routes/Register";
 import Login from "./routes/Login";
 import Navbar from "./components/Navbar";
 import { useQuery } from "react-query";
-
-export type cssType = string;
-export type navbarType = any;
-export type userInfoType = {
-  id: string;
-  email: string;
-  nickname: string;
-  name: string;
-};
+import { CssType, UserInfoType } from "./components/TypeAlias";
 
 const App: React.FC = () => {
-  const inputMainCss: cssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
-  const inputInputCss: cssType = `my-3 border border-gray-300`;
-  const [user, setUser] = useState<userInfoType | null>(null);
+  const inputMainCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
+  const inputInputCss: CssType = `my-3 border border-gray-300`;
+  const [user, setUser] = useState<UserInfoType | null>(null);
   const localStore = localStorage.getItem("userInfo");
-  const LocalData: userInfoType = localStore && JSON.parse(localStore);
+  const LocalData: UserInfoType = localStore && JSON.parse(localStore);
   const getUserInfo = async () => {
     if (localStorage.length !== 0) {
       const localStore = localStorage.getItem("userInfo");
-      const getLocalData: userInfoType = localStore && JSON.parse(localStore);
+      const getLocalData: UserInfoType = localStore && JSON.parse(localStore);
       setUser(getLocalData);
     }
   };

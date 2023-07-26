@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { cssType, navbarType } from "../App";
 import QuizMainForm from "../components/QuizMainForm";
 import { getRecordsListActive, getWordsListActive } from "../service/word";
-import { userInfoType } from "./Login";
 import RecordsReadModal from "../components/RecordsReadModal";
 import QuizWaitForm from "../components/QuizWaitForm";
 import UseModal from "../components/UseModal";
@@ -18,37 +16,24 @@ import CurrentRecordModal from "../components/CurrentRecordModal";
 import RecordDateModal from "../components/RecordDateModal";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-
-type Props = {
-  Navbar: navbarType;
-  LocalData: userInfoType | null;
-  inputMainCss: cssType;
-  inputInputCss: cssType;
-};
-
-export type objectType = {
-  enWord: string;
-  krWord: string;
-};
-
-type answersType = {
-  writer: string | undefined;
-  today: string;
-  matchedArr: objectType[];
-  NotMatchedArr: objectType[];
-};
+import {
+  AnswersType,
+  OnClickType,
+  QuizType,
+  WordObjectType,
+} from "../components/TypeAlias";
 
 let INDEX = 0;
 const WORDS = 5;
-let matchedArr: objectType[] = [];
-let NotMatchedArr: objectType[] = [];
+let matchedArr: WordObjectType[] = [];
+let NotMatchedArr: WordObjectType[] = [];
 
 export default function Quiz({
   Navbar,
   LocalData,
   inputMainCss,
   inputInputCss,
-}: Props) {
+}: QuizType) {
   const writer = LocalData?.email;
   const now = new Date();
   const year = now.getFullYear();
@@ -99,7 +84,7 @@ export default function Quiz({
     today,
     matchedArr,
     NotMatchedArr,
-  }: answersType) => {
+  }: AnswersType) => {
     resultPushActive({ matchedArr, NotMatchedArr, today, writer });
   };
 
@@ -198,10 +183,7 @@ export default function Quiz({
     setRecordsRead(true);
   };
 
-  const onDateRecord = async (
-    e: React.MouseEvent<SVGElement, MouseEvent>,
-    id: string
-  ) => {
+  const onDateRecord = async ({ e, id }: OnClickType) => {
     e.preventDefault();
     dateRecordActive({
       id,

@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { cssType } from "../App";
+import { CssType } from "../components/TypeAlias";
 
 export default function Home() {
-  const navCss: cssType = `m-auto w-[80%] h-[70px] flex justify-around items-center rounded-xl font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;
+  const navCss: CssType = `m-auto w-[80%] h-[70px] flex justify-around items-center rounded-xl font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;
   const newQuiz = () => {
     window.location.replace("/quiz");
   };

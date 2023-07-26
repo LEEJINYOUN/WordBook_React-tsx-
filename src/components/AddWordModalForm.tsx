@@ -1,11 +1,4 @@
-import React from "react";
-
-export type AddWordModalFormType = {
-  enWord: string;
-  krWord: string;
-  addWordInputChange: React.ChangeEventHandler;
-  addWordSubmit: React.FormEventHandler;
-};
+import { AddWordModalFormType } from "./TypeAlias";
 
 export default function AddWordModalForm({
   enWord,

@@ -1,16 +1,11 @@
-type Props = {
-  WORDS: number;
-  getWords: Array<any>[];
-  booleanChange: any;
-  onRecordsRead: () => void;
-};
+import { QuizMainFormType } from "./TypeAlias";
 
 export default function QuizMainForm({
   WORDS,
   getWords,
   booleanChange,
   onRecordsRead,
-}: Props) {
+}: QuizMainFormType) {
   const btnMatchCss = `w-[130px] h-[50px] rounded-xl flex justify-center items-center my-4 font-semibold text-base sm:text-lg text-white`;
   return (
     <div className="w-full h-full flex flex-col items-center">

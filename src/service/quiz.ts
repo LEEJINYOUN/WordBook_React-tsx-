@@ -1,30 +1,17 @@
+import {
+  DateRecordType,
+  QuizStopType,
+  ResultPushType,
+} from "./ActiveTypeAlias";
 import { client } from "./sanity";
 import { v4 as uuidv4 } from "uuid";
-
-interface answerObjectType {
-  writer: string | undefined;
-  today: string;
-  matchedArr: object[];
-  NotMatchedArr: object[];
-}
-
-type dateRecordType = {
-  id: string;
-  setGetRecordDateMatched: React.Dispatch<React.SetStateAction<Array<any>>>;
-  setGetRecordDateNotMatched: React.Dispatch<React.SetStateAction<Array<any>>>;
-  setGetRecordDate: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-interface quizStopType extends answerObjectType {
-  setQuizEnd: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export async function resultPushActive({
   writer,
   today,
   matchedArr,
   NotMatchedArr,
-}: answerObjectType) {
+}: ResultPushType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),
@@ -42,7 +29,7 @@ export async function dateRecordActive({
   setGetRecordDateMatched,
   setGetRecordDateNotMatched,
   setGetRecordDate,
-}: dateRecordType) {
+}: DateRecordType) {
   return client
     .fetch(
       `*[_type == "quiz" && _id == "${id}"]
@@ -61,7 +48,7 @@ export async function quizStopActive({
   matchedArr,
   NotMatchedArr,
   setQuizEnd,
-}: quizStopType) {
+}: QuizStopType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),

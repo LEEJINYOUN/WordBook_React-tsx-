@@ -1,10 +1,6 @@
-import { userInfoType } from "../App";
+import { GetUserInfoType } from "./TypeAlias";
 
-export type profileType = {
-  LocalData: userInfoType | null;
-};
-
-export default function UserInfo(LocalData: profileType) {
+export default function UserInfo(LocalData: GetUserInfoType) {
   return (
     <div className=" w-full py-2">
       <div className="flex text-lg font-semibold">

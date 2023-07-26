@@ -1,14 +1,9 @@
-import React from "react";
-
-export type searchFormType = {
-  searchWord: string;
-  onSearchChange: React.ChangeEventHandler;
-};
+import { SearchFormType } from "./TypeAlias";
 
 export default function SearchForm({
   searchWord,
   onSearchChange,
-}: searchFormType) {
+}: SearchFormType) {
   return (
     <div className="w-full h-[10%]">
       <input

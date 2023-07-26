@@ -1,18 +1,11 @@
+import {
+  AddWordCheckType,
+  AddWordObjectType,
+  GetRecordsListActiveType,
+  GetWordsListType,
+} from "./ActiveTypeAlias";
 import { client } from "./sanity";
 import { v4 as uuidv4 } from "uuid";
-
-interface wordObjectType {
-  writer: string | undefined;
-  enWord: string;
-  krWord: string;
-  bookmark: boolean;
-  today: object;
-}
-
-interface WordCheckType extends wordObjectType {
-  setEnWord: React.Dispatch<React.SetStateAction<string>>;
-  setKrWord: React.Dispatch<React.SetStateAction<string>>;
-}
 
 export async function addWordActive({
   writer,
@@ -20,7 +13,7 @@ export async function addWordActive({
   krWord,
   bookmark,
   today,
-}: wordObjectType) {
+}: AddWordObjectType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),
@@ -42,7 +35,7 @@ export async function wordCheckActive({
   krWord,
   bookmark,
   today,
-}: WordCheckType) {
+}: AddWordCheckType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && enWord == "${enWord}"]`
@@ -57,10 +50,7 @@ export async function wordCheckActive({
 export async function getWordsListActive({
   writer,
   setGetWords,
-}: {
-  writer: string | undefined;
-  setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
-}) {
+}: GetWordsListType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}"] | order(today asc)
@@ -74,10 +64,7 @@ export async function getWordsListActive({
 export async function getWordListBookmark({
   writer,
   setGetWords,
-}: {
-  writer: string | undefined;
-  setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
-}) {
+}: GetWordsListType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(today asc)
@@ -128,10 +115,7 @@ export async function wordDeleteActive({ id }: { id: string }) {
 export async function getRecordsListActive({
   writer,
   setGetRecords,
-}: {
-  writer: string | undefined;
-  setGetRecords: React.Dispatch<React.SetStateAction<any[]>>;
-}) {
+}: GetRecordsListActiveType) {
   return client
     .fetch(
       `*[_type == "quiz" && writer == "${writer}"] | order(today desc)

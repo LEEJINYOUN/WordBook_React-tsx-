@@ -1,22 +1,12 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import { cssType } from "../App";
+import { LoginType } from "../components/TypeAlias";
 
-export type Props = {
-  inputMainCss: cssType;
-  inputInputCss: cssType;
-  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
-};
-
-export type userInfoType = {
-  id: string;
-  email: string;
-  nickname: string;
-  name: string;
-};
-
-export default function Login({ inputMainCss, inputInputCss, setUser }: Props) {
+export default function Login({
+  inputMainCss,
+  inputInputCss,
+  setUser,
+}: LoginType) {
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[600px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">

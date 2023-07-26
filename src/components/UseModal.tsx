@@ -1,8 +1,6 @@
-type Props = {
-  booleanChange: any;
-};
+import { BooleanChangeType } from "./TypeAlias";
 
-export default function UseModal({ booleanChange }: Props) {
+export default function UseModal({ booleanChange }: BooleanChangeType) {
   return (
     <div className="z-50 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[60%] rounded-2xl">

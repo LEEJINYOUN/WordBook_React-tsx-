@@ -1,16 +1,10 @@
-import { objectType } from "../routes/Quiz";
-
-type Props = {
-  matchedArr: objectType[];
-  NotMatchedArr: objectType[];
-  onCurrentRecordClose: () => void;
-};
+import { CurrentRecordModalType } from "./TypeAlias";
 
 export default function CurrentRecordModal({
   matchedArr,
   NotMatchedArr,
   onCurrentRecordClose,
-}: Props) {
+}: CurrentRecordModalType) {
   const carsCss = `border flex justify-center items-center text-center mx-auto my-4 w-[85%] h-[70px] rounded-xl`;
   const wordsCss = `w-[90%] h-full`;
   const wordCss = `w-full h-[50%] flex justify-center items-center text-lg font-semibold"`;

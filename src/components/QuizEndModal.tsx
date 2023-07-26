@@ -1,16 +1,11 @@
-type Props = {
-  getWords: Array<any>[];
-  matchedArr: object[];
-  NotMatchedArr: object[];
-  onCurrentRecord: () => void;
-};
+import { QuizEndModalType } from "./TypeAlias";
 
 export default function QuizEndModal({
   getWords,
   matchedArr,
   NotMatchedArr,
   onCurrentRecord,
-}: Props) {
+}: QuizEndModalType) {
   const quizClose = () => {
     window.location.replace("/quiz");
   };

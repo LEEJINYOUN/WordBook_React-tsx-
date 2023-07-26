@@ -2,16 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import AddWordModalForm from "./AddWordModalForm";
 import { wordCheckActive } from "../service/word";
-
-export type AddWordModalType = {
-  onAddModal: any;
-  writer: string | undefined;
-  today: object;
-  enWord: string;
-  setEnWord: React.Dispatch<React.SetStateAction<string>>;
-  krWord: string;
-  setKrWord: React.Dispatch<React.SetStateAction<string>>;
-};
+import { AddWordModalType } from "./TypeAlias";
 
 export default function AddWordModal({
   onAddModal,

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Props } from "../routes/Register";
 import { emailSignUpCheckActive } from "../service/user";
+import { RegisterType } from "./TypeAlias";
 
-export default function RegisterForm({ inputMainCss, inputInputCss }: Props) {
+export default function RegisterForm({
+  inputMainCss,
+  inputInputCss,
+}: RegisterType) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userNickname, setUserNickname] = useState<string>("");
   const [userName, setUserName] = useState<string>("");

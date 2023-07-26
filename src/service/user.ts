@@ -1,22 +1,10 @@
-import { userInfoType } from "../App";
+import {
+  AuthCreateType,
+  AuthGetLoginType,
+  AuthLoginType,
+} from "./ActiveTypeAlias";
 import { client } from "./sanity";
 import { v4 as uuidv4 } from "uuid";
-
-type AuthCreateType = {
-  email: string;
-  nickname: string;
-  name: string;
-  password: string;
-};
-
-interface AuthGetLoginType {
-  email: string;
-  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
-}
-
-interface AuthLoginType extends AuthGetLoginType {
-  password: string;
-}
 
 export async function addUserActive({
   email,

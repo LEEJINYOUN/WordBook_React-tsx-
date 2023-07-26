@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { cssType } from "../App";
+import { CssType } from "./TypeAlias";
 
 export default function Navbar() {
-  const navCss: cssType = `w-[25%] h-full flex justify-center items-center font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;
+  const navCss: CssType = `w-[25%] h-full flex justify-center items-center font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;
   const newQuiz = () => {
     window.location.replace("/quiz");
   };

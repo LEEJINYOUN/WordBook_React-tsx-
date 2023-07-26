@@ -1,8 +1,6 @@
-type Props = {
-  booleanChange: any;
-};
+import { BooleanChangeType } from "./TypeAlias";
 
-export default function QuizWaitForm({ booleanChange }: Props) {
+export default function QuizWaitForm({ booleanChange }: BooleanChangeType) {
   return (
     <>
       <div className="border-b-2 border-gray-200 mx-auto w-full h-[90%] flex justify-center items-center font-bold text-xl">

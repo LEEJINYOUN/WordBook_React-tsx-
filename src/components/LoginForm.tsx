@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Props } from "../routes/Login";
 import { emailLoginActive } from "../service/user";
+import { LoginType } from "./TypeAlias";
 
 export default function LoginForm({
   inputMainCss,
   inputInputCss,
   setUser,
-}: Props) {
+}: LoginType) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

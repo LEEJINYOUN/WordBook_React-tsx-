@@ -1,14 +1,10 @@
-type Props = {
-  getRecordDateMatched: Array<any>;
-  getRecordDateNotMatched: Array<any>;
-  onCurrentRecordClose: () => void;
-};
+import { RecordDateModalType } from "./TypeAlias";
 
 export default function RecordDateModal({
   getRecordDateMatched,
   getRecordDateNotMatched,
   onCurrentRecordClose,
-}: Props) {
+}: RecordDateModalType) {
   return (
     <div className="z-120 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[70%] rounded-2xl">

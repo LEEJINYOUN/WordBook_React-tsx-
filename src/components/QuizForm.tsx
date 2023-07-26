@@ -1,26 +1,6 @@
 import React from "react";
-import { cssType } from "../App";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
-
-type questionType = {
-  enWord: string;
-  krWord: string;
-};
-
-type Props = {
-  btnStart: boolean;
-  INDEX: number;
-  question: Array<questionType>;
-  matched: boolean;
-  notMatched: boolean;
-  onSubmit: any;
-  inputMainCss: cssType;
-  inputInputCss: cssType;
-  answer: string;
-  setAnswer: React.Dispatch<React.SetStateAction<string>>;
-  quizStopBtn: () => void;
-  booleanChange: any;
-};
+import { QuizFormType } from "./TypeAlias";
 
 export default function QuizForm({
   btnStart,
@@ -35,7 +15,7 @@ export default function QuizForm({
   setAnswer,
   quizStopBtn,
   booleanChange,
-}: Props) {
+}: QuizFormType) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },

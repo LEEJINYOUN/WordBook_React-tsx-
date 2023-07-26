@@ -1,16 +1,8 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
-import { navbarType } from "../App";
 import UserInfo from "../components/UserInfo";
-import { userInfoType } from "../App";
+import { ProfileType } from "../components/TypeAlias";
 
-export type profileType = {
-  Navbar: navbarType;
-  LocalData: userInfoType | null;
-  setUser: React.Dispatch<React.SetStateAction<userInfoType | null>>;
-};
-
-export default function Profile({ Navbar, LocalData, setUser }: profileType) {
+export default function Profile({ Navbar, LocalData, setUser }: ProfileType) {
   const onLogout = () => {
     setUser(null);
     localStorage.clear();
