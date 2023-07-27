@@ -129,3 +129,21 @@ export interface WithdrawalModalType extends GetUserInfoType {
   modalToggle: () => void;
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
 }
+
+export type WordbookTopType = {
+  searchWord: string;
+  onSearchChange: React.ChangeEventHandler;
+  localGetOrder: any;
+  onOrderSelected: any;
+};
+
+export type WordbookItemLeftType = {
+  itemKey: any;
+  enWord: string;
+  krWord: string;
+};
+
+export type WordbookItemRightType = {
+  bookmark: boolean;
+  id: string;
+};

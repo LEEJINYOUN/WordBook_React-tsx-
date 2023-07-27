@@ -11,7 +11,7 @@ export default function QuizEndModal({
   };
 
   return (
-    <div className="z-100 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
+    <div className="z-100 absolute top-0 left-0 w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[70%] rounded-2xl">
         <div className="h-[60%] flex flex-col">
           <div className="flex justify-center h-[50px] items-center bg-lime-500 text-white text-lg font-semibold rounded-t-2xl">

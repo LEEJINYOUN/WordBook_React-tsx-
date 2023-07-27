@@ -43,7 +43,7 @@ export default function AddWordModal({
   };
 
   return (
-    <div className="z-50 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex ">
+    <div className="z-50 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[40%] rounded-2xl">
         <div className="flex justify-end text-center h-[10%]">
           <span

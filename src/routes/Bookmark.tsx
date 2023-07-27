@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import SearchForm from "../components/SearchForm";
 import {
   getWordListBookmarkActive,
   getWordListBookmarkEnWordOrderActive,
   getWordListBookmarkKrWordOrderActive,
-  wordBookmarkCheckActive,
-  wordDeleteActive,
 } from "../service/word";
-import { AiFillStar } from "react-icons/ai";
-import { BsFillTrashFill } from "react-icons/bs";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-import { OnClickType, WordbookType } from "../components/TypeAlias";
-
-export type OrderType = {
-  orderSelect: string;
-};
+import { WordbookType } from "../components/TypeAlias";
+import BookmarkTop from "../components/BookmarkTop";
+import WordbookItemLeft from "../components/WordbookItemLeft";
+import WordbookItemRight from "../components/WordbookItemRight";
 
 export default function Bookmark({ Navbar, LocalData }: WordbookType) {
   const writer = LocalData?.email;
@@ -49,16 +43,6 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
     }
   };
 
-  const onBookmark = async ({ e, id }: OnClickType) => {
-    e.preventDefault();
-    wordBookmarkCheckActive({ id });
-  };
-
-  const onDelete = async ({ e, id }: OnClickType) => {
-    e.preventDefault();
-    wordDeleteActive({ id });
-  };
-
   const filterWords = getWords
     // eslint-disable-next-line array-callback-return
     .filter((val) => {
@@ -77,38 +61,12 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
           key={key}
           className="border border-gray-300 flex items-center text-center mx-auto pl-2 pt-2 my-4 w-[85%] h-[90px] rounded-xl"
         >
-          <div className="w-[90%] h-full">
-            <div className="w-full h-[30%] flex items-center text-lg font-semibold">
-              {key + 1}. {item.enWord}
-            </div>
-            <div className="w-full h-[70%] flex items-center pl-2">
-              {item.krWord}
-            </div>
-          </div>
-          <div className="w-[10%] h-full">
-            <div className=" flex flex-col w-full h-[50%] justify-center items-center">
-              {item.bookmark === false ? (
-                <AiFillStar
-                  className="text-lg cursor-pointer duration-200 hover:text-yellow-300"
-                  id={item._id}
-                  onClick={(e) => onBookmark({ e, id: item._id })}
-                />
-              ) : (
-                <AiFillStar
-                  className="text-lg cursor-pointer text-yellow-300"
-                  id={item._id}
-                  onClick={(e) => onBookmark({ e, id: item._id })}
-                />
-              )}
-            </div>
-            <div className="flex flex-col w-full h-[50%] justify-center items-center">
-              <BsFillTrashFill
-                className="cursor-pointer duration-200 hover:text-red-500 "
-                id={item._id}
-                onClick={(e) => onDelete({ e, id: item._id })}
-              />
-            </div>
-          </div>
+          <WordbookItemLeft
+            itemKey={key}
+            enWord={item.enWord}
+            krWord={item.krWord}
+          />
+          <WordbookItemRight bookmark={item.bookmark} id={item._id} />
         </div>
       );
     });
@@ -136,25 +94,12 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
           </span>
         ) : (
           <main className="h-[90%] flex flex-col">
-            <div className="flex flex-rol">
-              <SearchForm
-                searchWord={searchWord}
-                onSearchChange={onSearchChange}
-              />
-              <div className="w-[20%] h-full flex justify-center items-center">
-                <select
-                  className="w-[80px] h-[35px] select-none rounded-lg bg-gray-100 ring-1 ring-gray-300 text-sm cursor-pointer outline-none px-2 "
-                  defaultValue={localGetOrder}
-                  onChange={(e) => {
-                    onOrderSelected(e);
-                  }}
-                >
-                  <option value="order">등록순</option>
-                  <option value="enOrder">알파벳순</option>
-                  <option value="krOrder">한글순</option>
-                </select>
-              </div>
-            </div>
+            <BookmarkTop
+              searchWord={searchWord}
+              onSearchChange={onSearchChange}
+              localGetOrder={localGetOrder}
+              onOrderSelected={onOrderSelected}
+            />
             <div className="mx-auto w-full h-[90%] overflow-y-auto scrollbar-hide">
               {filterWords}
             </div>

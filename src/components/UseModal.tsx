@@ -2,7 +2,7 @@ import { BooleanChangeType } from "./TypeAlias";
 
 export default function UseModal({ booleanChange }: BooleanChangeType) {
   return (
-    <div className="z-50 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
+    <div className="z-50 absolute top-0 left-0 w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[60%] rounded-2xl">
         <div className="h-[80%] font-semibold p-4">
           <p className="py-2">1. '시작' 을 클릭하면 퀴즈가 시작됩니다.</p>
