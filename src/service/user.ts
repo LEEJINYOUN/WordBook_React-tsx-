@@ -1,5 +1,6 @@
 import {
   AuthCreateType,
+  AuthDeleteType,
   AuthGetLoginType,
   AuthLoginType,
 } from "./ActiveTypeAlias";
@@ -80,4 +81,16 @@ export async function emailLoginActive({
         ? alert("비밀번호가 다릅니다")
         : getEmailLoginActive({ email, setUser })
     );
+}
+
+export async function accountDeleteActive({ email, setUser }: AuthDeleteType) {
+  return (client.delete({ query: `*[_type == "user" && email == "${email}"]` }),
+  client.delete({ query: `*[_type == "word" && writer == "${email}"]` }),
+  client.delete({ query: `*[_type == "quiz" && writer == "${email}"]` })).then(
+    () => {
+      setUser(null);
+      localStorage.clear();
+      window.location.replace("/");
+    }
+  );
 }

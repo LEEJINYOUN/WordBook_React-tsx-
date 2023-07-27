@@ -124,3 +124,8 @@ export interface ProfileType extends GetUserInfoType {
 export type BooleanChangeType = {
   booleanChange: any;
 };
+
+export interface WithdrawalModalType extends GetUserInfoType {
+  modalToggle: () => void;
+  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+}

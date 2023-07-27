@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
 import UserInfo from "../components/UserInfo";
 import { ProfileType } from "../components/TypeAlias";
+import { useState } from "react";
+import WithdrawalModal from "../components/WithdrawalModal";
 
 export default function Profile({ Navbar, LocalData, setUser }: ProfileType) {
+  const [withdrawal, setWithdrawal] = useState<boolean>(false);
+  const modalToggle = () => {
+    setWithdrawal((prev) => !prev);
+  };
   const onLogout = () => {
     setUser(null);
     localStorage.clear();
@@ -21,6 +27,19 @@ export default function Profile({ Navbar, LocalData, setUser }: ProfileType) {
             >
               로그아웃
             </NavLink>
+            <button
+              className="bg-blue-300 flex justify-center items-center ml-6 w-[100px] h-10 font-semibold text-white rounded-lg hover:bg-red-400 hover:font-bold duration-200"
+              onClick={modalToggle}
+            >
+              회원탈퇴
+            </button>
+            {withdrawal === true && (
+              <WithdrawalModal
+                modalToggle={modalToggle}
+                LocalData={LocalData}
+                setUser={setUser}
+              />
+            )}
           </div>
         </main>
       </div>

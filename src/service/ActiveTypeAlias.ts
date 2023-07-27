@@ -55,3 +55,8 @@ export type DateRecordType = {
 export interface QuizStopType extends ResultPushType {
   setQuizEnd: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export type AuthDeleteType = {
+  email: string | undefined;
+  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+};
