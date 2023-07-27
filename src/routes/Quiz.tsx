@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import QuizMainForm from "../components/QuizMainForm";
-import { getRecordsListActive, getWordsListActive } from "../service/word";
+import { getRecordsListActive, getWordListActive } from "../service/word";
 import RecordsReadModal from "../components/RecordsReadModal";
 import QuizWaitForm from "../components/QuizWaitForm";
 import UseModal from "../components/UseModal";
@@ -201,7 +201,7 @@ export default function Quiz({
   };
 
   const { isLoading } = useQuery("getLists", () => {
-    getWordsListActive({ writer, setGetWords });
+    getWordListActive({ writer, setGetWords });
     getRecordsListActive({ writer, setGetRecords });
   });
 

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
 import AddWordModal from "../components/AddWordModal";
 import {
-  getWordsListActive,
+  getWordListActive,
+  getWordListEnWordOrderActive,
+  getWordListKrWordOrderActive,
   wordBookmarkCheckActive,
   wordDeleteActive,
 } from "../service/word";
@@ -12,6 +14,10 @@ import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
 import { OnClickType, WordbookType } from "../components/TypeAlias";
 
+export type OrderType = {
+  orderSelect: string;
+};
+
 export default function Wordbook({ Navbar, LocalData }: WordbookType) {
   const writer = LocalData?.email;
   const today = new Date();
@@ -20,6 +26,24 @@ export default function Wordbook({ Navbar, LocalData }: WordbookType) {
   const [enWord, setEnWord] = useState<string>("");
   const [krWord, setKrWord] = useState<string>("");
   const [getWords, setGetWords] = useState<Array<any>>([]);
+  const [orderSelect, setOrderSelect] = useState<string>("order");
+
+  const onOrderSelected = (e: any) => {
+    let value = e.target.value;
+    if (value === "order") {
+      setOrderSelect("order");
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListActive({ writer, setGetWords });
+    } else if (value === "enOrder") {
+      setOrderSelect("enOrder");
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListEnWordOrderActive({ writer, setGetWords });
+    } else if (value === "krOrder") {
+      setOrderSelect("krOrder");
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListKrWordOrderActive({ writer, setGetWords });
+    }
+  };
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -100,10 +124,18 @@ export default function Wordbook({ Navbar, LocalData }: WordbookType) {
       );
     });
 
-  const { isLoading } = useQuery("getWords", () => {
-    getWordsListActive({ writer, setGetWords });
-  });
+  const localOrder = localStorage.getItem("wordbookOrder");
+  const localGetOrder = localOrder && JSON.parse(localOrder);
 
+  const { isLoading } = useQuery("getWords", () => {
+    if (localGetOrder === null || localGetOrder === "order") {
+      getWordListActive({ writer, setGetWords });
+    } else if (localGetOrder === "enOrder") {
+      getWordListEnWordOrderActive({ writer, setGetWords });
+    } else if (localGetOrder === "krOrder") {
+      getWordListKrWordOrderActive({ writer, setGetWords });
+    }
+  });
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
@@ -114,10 +146,25 @@ export default function Wordbook({ Navbar, LocalData }: WordbookType) {
           </span>
         ) : (
           <main className="h-[90%] flex flex-col">
-            <SearchForm
-              searchWord={searchWord}
-              onSearchChange={onSearchChange}
-            />
+            <div className="flex flex-rol">
+              <SearchForm
+                searchWord={searchWord}
+                onSearchChange={onSearchChange}
+              />
+              <div className="w-[20%] h-full flex justify-center items-center">
+                <select
+                  className="w-[80px] h-[35px] select-none rounded-lg bg-gray-100 ring-1 ring-gray-300 text-sm cursor-pointer outline-none px-2 "
+                  defaultValue={localGetOrder}
+                  onChange={(e) => {
+                    onOrderSelected(e);
+                  }}
+                >
+                  <option value="order">등록순</option>
+                  <option value="enOrder">알파벳순</option>
+                  <option value="krOrder">한글순</option>
+                </select>
+              </div>
+            </div>
             <div className="mx-auto w-full h-[80%] overflow-y-auto scrollbar-hide">
               {filterWords}
             </div>

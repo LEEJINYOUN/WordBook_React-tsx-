@@ -47,7 +47,7 @@ export async function wordCheckActive({
     );
 }
 
-export async function getWordsListActive({
+export async function getWordListActive({
   writer,
   setGetWords,
 }: GetWordsListType) {
@@ -61,13 +61,69 @@ export async function getWordsListActive({
     });
 }
 
-export async function getWordListBookmark({
+export async function getWordListEnWordOrderActive({
+  writer,
+  setGetWords,
+}: GetWordsListType) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}"] | order(enWord asc)
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
+}
+
+export async function getWordListKrWordOrderActive({
+  writer,
+  setGetWords,
+}: GetWordsListType) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}"] | order(krWord asc)
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
+}
+
+export async function getWordListBookmarkActive({
   writer,
   setGetWords,
 }: GetWordsListType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(today asc)
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
+}
+
+export async function getWordListBookmarkEnWordOrderActive({
+  writer,
+  setGetWords,
+}: GetWordsListType) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(enWord asc)
+    `
+    )
+    .then((res) => {
+      setGetWords(res);
+    });
+}
+
+export async function getWordListBookmarkKrWordOrderActive({
+  writer,
+  setGetWords,
+}: GetWordsListType) {
+  return client
+    .fetch(
+      `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(krWord asc)
     `
     )
     .then((res) => {
@@ -118,7 +174,7 @@ export async function getRecordsListActive({
 }: GetRecordsListActiveType) {
   return client
     .fetch(
-      `*[_type == "quiz" && writer == "${writer}"] | order(today desc)
+      `*[_type == "quiz" && writer == "${writer}"] | order(created asc)
     `
     )
     .then((res) => {

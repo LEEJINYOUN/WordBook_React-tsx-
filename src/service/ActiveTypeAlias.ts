@@ -33,6 +33,11 @@ export type GetWordsListType = {
   setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
+export type QuizGetWordsListType = {
+  writer: string | undefined;
+  setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
+};
+
 export type GetRecordsListActiveType = {
   writer: string | undefined;
   setGetRecords: React.Dispatch<React.SetStateAction<any[]>>;
