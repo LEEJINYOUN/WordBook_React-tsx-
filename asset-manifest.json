@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/WordBook_React-tsx-/static/css/main.dd60ebed.css",
-    "main.js": "/WordBook_React-tsx-/static/js/main.93260cfc.js",
-    "static/js/726.2f41b325.chunk.js": "/WordBook_React-tsx-/static/js/726.2f41b325.chunk.js",
-    "static/media/spinner.gif": "/WordBook_React-tsx-/static/media/spinner.767cdecf09af74fb4e89.gif",
-    "index.html": "/WordBook_React-tsx-/index.html",
-    "main.dd60ebed.css.map": "/WordBook_React-tsx-/static/css/main.dd60ebed.css.map",
-    "main.93260cfc.js.map": "/WordBook_React-tsx-/static/js/main.93260cfc.js.map",
-    "726.2f41b325.chunk.js.map": "/WordBook_React-tsx-/static/js/726.2f41b325.chunk.js.map"
+    "main.css": "/WordBookReact/static/css/main.dd60ebed.css",
+    "main.js": "/WordBookReact/static/js/main.0c9c2dd1.js",
+    "static/js/726.2f41b325.chunk.js": "/WordBookReact/static/js/726.2f41b325.chunk.js",
+    "static/media/spinner.gif": "/WordBookReact/static/media/spinner.767cdecf09af74fb4e89.gif",
+    "index.html": "/WordBookReact/index.html",
+    "main.dd60ebed.css.map": "/WordBookReact/static/css/main.dd60ebed.css.map",
+    "main.0c9c2dd1.js.map": "/WordBookReact/static/js/main.0c9c2dd1.js.map",
+    "726.2f41b325.chunk.js.map": "/WordBookReact/static/js/726.2f41b325.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd60ebed.css",
-    "static/js/main.93260cfc.js"
+    "static/js/main.0c9c2dd1.js"
   ]
 }
