@@ -63,7 +63,7 @@ export async function getEmailLoginActive({
       };
       setUser(userObject);
       localStorage.setItem("userInfo", JSON.stringify(userObject));
-      window.location.href = "/home";
+      window.location.replace("/home");
     });
 }
 
