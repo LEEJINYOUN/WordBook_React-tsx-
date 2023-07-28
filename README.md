@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# 단어장 앱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2> 📃 개요 </h2>
 
-## Available Scripts
+- <h3>단어를 등록해서 외울 수 있는 단어장</h3>
+  <br/><br/>
 
-In the project directory, you can run:
+<h2> 🛠 사용 기술 </h2>
 
-### `npm start`
+- <h3>React</h3>
+- <h3>React Query</h3>
+- <h3>Typescript</h3>
+- <h3>Tailwind css</h3>
+- <h3>Sanity.io</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <br/><br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h2> ⚙️ 구현 기능 </h2>
 
-### `npm test`
+- <h3>회원가입, 로그인 (이메일)</h3>
+- <h3>단어를 등록해서 나만의 단어장 만들기</h3>
+- <h3>중요한 단어를 즐겨찾기 등록</h3>
+- <h3>등록한 단어들로 퀴즈 풀기</h3>
+  <br/><br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2> 🎥 구현 화면 </h2>
 
-### `npm run build`
+## 이메일 회원가입과 로그인
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![캡처](/public/imgs/회원가입_readme.gif)
+![캡처](/public/imgs/로그인_readme.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 단어 등록과 삭제
 
-### `npm run eject`
+![캡처](/public/imgs/단어등록_readme.gif)
+![캡처](/public/imgs/단어삭제_readme.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 단어 즐겨찾기
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![캡처](/public/imgs/단어북마크_readme.gif)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 단어 정렬
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![캡처](/public/imgs/단어정렬_readme.gif)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## 단어 검색
+
+![캡처](/public/imgs/단어검색_readme.gif)
+
+---
+
+## 단어퀴즈
+
+![캡처](/public/imgs/퀴즈_readme.gif)
