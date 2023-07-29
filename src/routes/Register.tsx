@@ -5,6 +5,7 @@ import { RegisterType } from "../components/TypeAlias";
 export default function Register({
   inputMainCss,
   inputInputCss,
+  navigate,
 }: RegisterType) {
   return (
     <section className="bg-gray-300 h-[100vh]">
@@ -15,6 +16,7 @@ export default function Register({
         <RegisterForm
           inputMainCss={inputMainCss}
           inputInputCss={inputInputCss}
+          navigate={navigate}
         />
         <div className="h-[10%] flex flex-row justify-center items-center">
           <span className="text-base sm:text-lg mx-2">회원인가요?</span>

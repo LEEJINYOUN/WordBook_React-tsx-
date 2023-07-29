@@ -5,6 +5,7 @@ import { RegisterType } from "./TypeAlias";
 export default function RegisterForm({
   inputMainCss,
   inputInputCss,
+  navigate,
 }: RegisterType) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userNickname, setUserNickname] = useState<string>("");
@@ -33,6 +34,7 @@ export default function RegisterForm({
       nickname: userNickname,
       name: userName,
       password: String(userPw),
+      navigate,
     });
   };
 

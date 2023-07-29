@@ -6,6 +6,7 @@ export default function Login({
   inputMainCss,
   inputInputCss,
   setUser,
+  navigate,
 }: LoginType) {
   return (
     <section className="bg-gray-300 h-[100vh]">
@@ -17,6 +18,7 @@ export default function Login({
           inputMainCss={inputMainCss}
           inputInputCss={inputInputCss}
           setUser={setUser}
+          navigate={navigate}
         />
         <div className="h-[15%] flex flex-row justify-center items-center">
           <span className="text-base sm:text-lg mx-2">회원이 아닌가요?</span>

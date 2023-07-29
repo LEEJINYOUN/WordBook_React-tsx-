@@ -33,6 +33,7 @@ export default function Quiz({
   LocalData,
   inputMainCss,
   inputInputCss,
+  navigate,
 }: QuizType) {
   const writer = LocalData?.email;
   const now = new Date();
@@ -249,6 +250,7 @@ export default function Quiz({
                 matchedArr={matchedArr}
                 NotMatchedArr={NotMatchedArr}
                 onCurrentRecord={onCurrentRecord}
+                navigate={navigate}
               />
             )}
             {currentRecord === true && (

@@ -4,7 +4,12 @@ import { CssType, ProfileType } from "../components/TypeAlias";
 import { useState } from "react";
 import WithdrawalModal from "../components/WithdrawalModal";
 
-export default function Profile({ Navbar, LocalData, setUser }: ProfileType) {
+export default function Profile({
+  Navbar,
+  LocalData,
+  setUser,
+  navigate,
+}: ProfileType) {
   const profileBtnCss: CssType = `bg-blue-300 flex justify-center items-center ml-6 w-[100px] h-10 font-semibold text-white rounded-lg hover:font-bold duration-200`;
   const [withdrawal, setWithdrawal] = useState<boolean>(false);
   const modalToggle = () => {
@@ -39,6 +44,7 @@ export default function Profile({ Navbar, LocalData, setUser }: ProfileType) {
                 modalToggle={modalToggle}
                 LocalData={LocalData}
                 setUser={setUser}
+                navigate={navigate}
               />
             )}
           </div>

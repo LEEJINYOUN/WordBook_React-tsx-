@@ -10,6 +10,7 @@ import Login from "./routes/Login";
 import Navbar from "./components/Navbar";
 import { useQuery } from "react-query";
 import { CssType, UserInfoType } from "./components/TypeAlias";
+import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
   const inputMainCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
@@ -24,6 +25,7 @@ const App: React.FC = () => {
       setUser(getLocalData);
     }
   };
+  const navigate = useNavigate();
   const { data } = useQuery("userInfo", getUserInfo);
 
   return (
@@ -32,11 +34,16 @@ const App: React.FC = () => {
         <Route
           path="/"
           element={
-            <Login
-              inputMainCss={inputMainCss}
-              inputInputCss={inputInputCss}
-              setUser={setUser}
-            />
+            user === null ? (
+              <Login
+                inputMainCss={inputMainCss}
+                inputInputCss={inputInputCss}
+                setUser={setUser}
+                navigate={navigate}
+              />
+            ) : (
+              <Home navigate={navigate} />
+            )
           }
         />
         <Route
@@ -45,10 +52,10 @@ const App: React.FC = () => {
             <Register
               inputMainCss={inputMainCss}
               inputInputCss={inputInputCss}
+              navigate={navigate}
             />
           }
         />
-        <Route path="/home" element={<Home />} />
         <Route
           path="/wordbook"
           element={<Wordbook Navbar={Navbar} LocalData={LocalData} />}
@@ -65,13 +72,19 @@ const App: React.FC = () => {
               LocalData={LocalData}
               inputMainCss={inputMainCss}
               inputInputCss={inputInputCss}
+              navigate={navigate}
             />
           }
         />
         <Route
           path="/profile"
           element={
-            <Profile Navbar={Navbar} LocalData={LocalData} setUser={setUser} />
+            <Profile
+              Navbar={Navbar}
+              LocalData={LocalData}
+              setUser={setUser}
+              navigate={navigate}
+            />
           }
         />
       </Routes>

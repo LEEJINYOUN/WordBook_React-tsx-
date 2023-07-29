@@ -1,4 +1,6 @@
+export type NavigateType = any;
 export type CssType = string;
+export interface HomeType extends NavigateType {}
 export type NavbarType = any;
 export type UserInfoType = {
   id: string;
@@ -7,31 +9,31 @@ export type UserInfoType = {
   name: string;
 };
 
-export type RegisterType = {
+export interface RegisterType extends NavigateType {
   inputMainCss: CssType;
   inputInputCss: CssType;
-};
+}
 
-export interface LoginType extends RegisterType {
+export interface LoginType extends RegisterType, NavigateType {
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
 }
 
-export type WordbookType = {
+export interface WordbookType {
   Navbar: NavbarType;
   LocalData: UserInfoType | null;
-};
+}
 
-export type OnClickType = {
+export interface OnClickType {
   e: React.MouseEvent<SVGElement, MouseEvent>;
   id: string;
-};
+}
 
 export type SearchFormType = {
   searchWord: string;
   onSearchChange: React.ChangeEventHandler;
 };
 
-export type AddWordModalType = {
+export interface AddWordModalType {
   onAddModal: any;
   writer: string | undefined;
   today: object;
@@ -39,14 +41,14 @@ export type AddWordModalType = {
   setEnWord: React.Dispatch<React.SetStateAction<string>>;
   krWord: string;
   setKrWord: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
 export interface AddWordModalFormType extends WordObjectType {
   addWordInputChange: React.ChangeEventHandler;
   addWordSubmit: React.FormEventHandler;
 }
 
-export interface QuizType extends RegisterType, WordbookType {}
+export interface QuizType extends RegisterType, WordbookType, NavbarType {}
 
 export type WordObjectType = {
   enWord: string;
@@ -82,12 +84,12 @@ export type QuizFormType = {
   booleanChange: any;
 };
 
-export type QuizEndModalType = {
+export interface QuizEndModalType extends NavbarType {
   getWords: Array<any>[];
   matchedArr: object[];
   NotMatchedArr: object[];
   onCurrentRecord: () => void;
-};
+}
 
 export type CurrentRecordModalType = {
   matchedArr: WordObjectType[];
@@ -119,6 +121,7 @@ export type GetUserInfoType = {
 export interface ProfileType extends GetUserInfoType {
   Navbar: NavbarType;
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+  navigate: any;
 }
 
 export type BooleanChangeType = {
@@ -128,6 +131,7 @@ export type BooleanChangeType = {
 export interface WithdrawalModalType extends GetUserInfoType {
   modalToggle: () => void;
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+  navigate: any;
 }
 
 export type WordbookTopType = {
@@ -143,7 +147,7 @@ export type WordbookItemLeftType = {
   krWord: string;
 };
 
-export type WordbookItemRightType = {
+export interface WordbookItemRightType {
   bookmark: boolean;
   id: string;
-};
+}

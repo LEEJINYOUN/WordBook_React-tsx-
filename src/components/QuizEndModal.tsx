@@ -5,9 +5,11 @@ export default function QuizEndModal({
   matchedArr,
   NotMatchedArr,
   onCurrentRecord,
+  navigate,
 }: QuizEndModalType) {
   const quizClose = () => {
-    window.location.replace("/quiz");
+    window.location.reload();
+    navigate("/quiz");
   };
 
   return (

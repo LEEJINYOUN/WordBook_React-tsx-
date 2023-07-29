@@ -1,27 +1,27 @@
-import { UserInfoType } from "../components/TypeAlias";
+import { NavigateType, UserInfoType } from "../components/TypeAlias";
 
-export type AuthCreateType = {
+export interface AuthCreateType extends NavigateType {
   email: string;
   nickname: string;
   name: string;
   password: string;
-};
+}
 
-export interface AuthGetLoginType {
+export interface AuthGetLoginType extends NavigateType {
   email: string;
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
 }
-export interface AuthLoginType extends AuthGetLoginType {
+export interface AuthLoginType extends AuthGetLoginType, NavigateType {
   password: string;
 }
 
-export type AddWordObjectType = {
+export interface AddWordObjectType {
   writer: string | undefined;
   enWord: string;
   krWord: string;
   bookmark: boolean;
   today: object;
-};
+}
 
 export interface AddWordCheckType extends AddWordObjectType {
   setEnWord: React.Dispatch<React.SetStateAction<string>>;
@@ -64,4 +64,5 @@ export interface QuizStopType extends ResultPushType {
 export type AuthDeleteType = {
   email: string | undefined;
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+  navigate: any;
 };

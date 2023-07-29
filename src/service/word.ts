@@ -174,7 +174,7 @@ export async function getRecordsListActive({
 }: GetRecordsListActiveType) {
   return client
     .fetch(
-      `*[_type == "quiz" && writer == "${writer}"] | order(created asc)
+      `*[_type == "quiz" && writer == "${writer}"] | order(today desc)
     `
     )
     .then((res) => {

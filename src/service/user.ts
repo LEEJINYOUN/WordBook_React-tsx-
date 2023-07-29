@@ -12,6 +12,7 @@ export async function addUserActive({
   nickname,
   name,
   password,
+  navigate,
 }: AuthCreateType) {
   return client
     .createIfNotExists({
@@ -24,7 +25,7 @@ export async function addUserActive({
     })
     .then(() => {
       alert("계정이 생성되었습니다.");
-      window.location.href = "/";
+      navigate("/");
     });
 }
 
@@ -33,6 +34,7 @@ export async function emailSignUpCheckActive({
   nickname,
   name,
   password,
+  navigate,
 }: AuthCreateType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
@@ -44,6 +46,7 @@ export async function emailSignUpCheckActive({
             nickname,
             name,
             password,
+            navigate,
           })
     );
 }
@@ -51,6 +54,7 @@ export async function emailSignUpCheckActive({
 export async function getEmailLoginActive({
   email,
   setUser,
+  navigate,
 }: AuthGetLoginType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
@@ -63,7 +67,6 @@ export async function getEmailLoginActive({
       };
       setUser(userObject);
       localStorage.setItem("userInfo", JSON.stringify(userObject));
-      window.location.replace("/home");
     });
 }
 
@@ -71,6 +74,7 @@ export async function emailLoginActive({
   email,
   password,
   setUser,
+  navigate,
 }: AuthLoginType) {
   return client
     .fetch(
@@ -79,18 +83,22 @@ export async function emailLoginActive({
     .then((res) =>
       res.password === false
         ? alert("비밀번호가 다릅니다")
-        : getEmailLoginActive({ email, setUser })
+        : getEmailLoginActive({ email, setUser, navigate })
     );
 }
 
-export async function accountDeleteActive({ email, setUser }: AuthDeleteType) {
+export async function accountDeleteActive({
+  email,
+  setUser,
+  navigate,
+}: AuthDeleteType) {
   return (client.delete({ query: `*[_type == "user" && email == "${email}"]` }),
   client.delete({ query: `*[_type == "word" && writer == "${email}"]` }),
   client.delete({ query: `*[_type == "quiz" && writer == "${email}"]` })).then(
     () => {
       setUser(null);
       localStorage.clear();
-      window.location.replace("/");
+      navigate("/");
     }
   );
 }

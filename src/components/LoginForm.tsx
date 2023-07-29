@@ -6,6 +6,7 @@ export default function LoginForm({
   inputMainCss,
   inputInputCss,
   setUser,
+  navigate,
 }: LoginType) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
@@ -25,6 +26,7 @@ export default function LoginForm({
       email: userEmail,
       password: String(userPw),
       setUser,
+      navigate,
     });
   };
 
