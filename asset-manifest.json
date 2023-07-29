@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/WordBook_React-tsx-/static/css/main.dd60ebed.css",
-    "main.js": "/WordBook_React-tsx-/static/js/main.567d86db.js",
+    "main.js": "/WordBook_React-tsx-/static/js/main.d21ef01a.js",
     "static/js/726.2f41b325.chunk.js": "/WordBook_React-tsx-/static/js/726.2f41b325.chunk.js",
     "static/media/spinner.gif": "/WordBook_React-tsx-/static/media/spinner.767cdecf09af74fb4e89.gif",
     "index.html": "/WordBook_React-tsx-/index.html",
     "main.dd60ebed.css.map": "/WordBook_React-tsx-/static/css/main.dd60ebed.css.map",
-    "main.567d86db.js.map": "/WordBook_React-tsx-/static/js/main.567d86db.js.map",
+    "main.d21ef01a.js.map": "/WordBook_React-tsx-/static/js/main.d21ef01a.js.map",
     "726.2f41b325.chunk.js.map": "/WordBook_React-tsx-/static/js/726.2f41b325.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd60ebed.css",
-    "static/js/main.567d86db.js"
+    "static/js/main.d21ef01a.js"
   ]
 }
