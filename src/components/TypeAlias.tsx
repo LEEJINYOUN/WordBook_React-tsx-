@@ -1,6 +1,5 @@
 export type NavigateType = any;
 export type CssType = string;
-export interface HomeType extends NavigateType {}
 export type NavbarType = any;
 export type UserInfoType = {
   id: string;
@@ -151,3 +150,35 @@ export interface WordbookItemRightType {
   bookmark: boolean;
   id: string;
 }
+
+export type OnBoardReadType = {
+  e: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  id: string;
+};
+
+export type OnDeleteBoardType = {
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  id: string;
+};
+
+export type BoardTopType = {
+  onSearchBoardChange: React.ChangeEventHandler;
+  searchBoard: string;
+  onCategorySelected: any;
+};
+
+export interface BoardSearchFormType {
+  onSearchBoardChange: React.ChangeEventHandler;
+  searchBoard: string;
+}
+
+export type AddBoardModalType = {
+  writer: string | undefined;
+  onAddBoardModalToggle: () => void;
+};
+
+export type BoardReadModalType = {
+  setBoardReadModal: React.Dispatch<React.SetStateAction<boolean>>;
+  boardRead: any[];
+  writer: string | undefined;
+};

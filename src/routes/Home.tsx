@@ -1,11 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { CssType, HomeType } from "../components/TypeAlias";
+import { CssType } from "../components/TypeAlias";
 
-export default function Home({ navigate }: HomeType) {
+export default function Home() {
   const navCss: CssType = `m-auto w-[80%] h-[70px] flex justify-around items-center rounded-xl font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;
-  const newQuiz = () => {
-    navigate("/quiz");
-  };
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[600px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
@@ -18,6 +15,9 @@ export default function Home({ navigate }: HomeType) {
           </NavLink>
           <NavLink className={navCss} to="/quiz">
             퀴즈
+          </NavLink>
+          <NavLink className={navCss} to="/board">
+            커뮤니티
           </NavLink>
           <NavLink className={navCss} to="/profile">
             프로필

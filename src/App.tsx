@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import { useQuery } from "react-query";
 import { CssType, UserInfoType } from "./components/TypeAlias";
 import { useNavigate } from "react-router-dom";
+import Board from "./routes/Board";
 
 const App: React.FC = () => {
   const inputMainCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
@@ -42,7 +43,7 @@ const App: React.FC = () => {
                 navigate={navigate}
               />
             ) : (
-              <Home navigate={navigate} />
+              <Home />
             )
           }
         />
@@ -63,6 +64,10 @@ const App: React.FC = () => {
         <Route
           path="/bookmark"
           element={<Bookmark Navbar={Navbar} LocalData={LocalData} />}
+        />
+        <Route
+          path="/board"
+          element={<Board Navbar={Navbar} LocalData={LocalData} />}
         />
         <Route
           path="/quiz"

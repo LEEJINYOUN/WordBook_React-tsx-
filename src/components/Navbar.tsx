@@ -30,6 +30,13 @@ export default function Navbar() {
       to: "/quiz",
     },
     {
+      title: "커뮤니티",
+      className: `${
+        pathName === "/board" ? `${navCss} bg-lime-600` : `${navCss}`
+      }`,
+      to: "/board",
+    },
+    {
       title: "프로필",
       className: `${
         pathName === "/profile"

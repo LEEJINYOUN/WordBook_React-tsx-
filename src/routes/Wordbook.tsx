@@ -22,7 +22,7 @@ export default function Wordbook({ Navbar, LocalData }: WordbookType) {
   const [getWords, setGetWords] = useState<Array<any>>([]);
   const [orderSelect, setOrderSelect] = useState<string>("order");
 
-  const onOrderSelected = (e: any) => {
+  const onOrderSelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
     let value = e.target.value;
     if (value === "order") {
       setOrderSelect("order");

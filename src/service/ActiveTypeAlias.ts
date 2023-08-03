@@ -66,3 +66,21 @@ export type AuthDeleteType = {
   setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
   navigate: any;
 };
+
+export type AddBoardType = {
+  writer: string | undefined;
+  category: string;
+  title: string;
+  content: string;
+  today: string;
+};
+
+export type GetBoardsListActiveType = {
+  setGetBoards: React.Dispatch<React.SetStateAction<any[]>>;
+};
+
+export type GetBoardReadActiveType = {
+  id: string;
+  setBoardRead: React.Dispatch<React.SetStateAction<any[]>>;
+  setBoardReadModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
