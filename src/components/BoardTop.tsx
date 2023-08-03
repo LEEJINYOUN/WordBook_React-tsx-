@@ -1,4 +1,3 @@
-import React from "react";
 import { BoardTopType } from "./TypeAlias";
 import BoardSearchForm from "./BoardSearchForm";
 

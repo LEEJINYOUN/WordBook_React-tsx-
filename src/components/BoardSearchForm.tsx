@@ -1,4 +1,3 @@
-import React from "react";
 import { BoardSearchFormType } from "./TypeAlias";
 
 export default function BoardSearchForm({
