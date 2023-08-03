@@ -94,7 +94,8 @@ export async function accountDeleteActive({
 }: AuthDeleteType) {
   return (client.delete({ query: `*[_type == "user" && email == "${email}"]` }),
   client.delete({ query: `*[_type == "word" && writer == "${email}"]` }),
-  client.delete({ query: `*[_type == "quiz" && writer == "${email}"]` })).then(
+  client.delete({ query: `*[_type == "quiz" && writer == "${email}"]` }),
+  client.delete({ query: `*[_type == "board" && writer == "${email}"]` })).then(
     () => {
       setUser(null);
       localStorage.clear();
