@@ -11,6 +11,7 @@ import { getBoardsListActive } from "../service/board";
 import BoardTop from "../components/BoardTop";
 import AddBoardModal from "../components/AddBoardModal";
 import BoardReadModal from "../components/BoardReadModal";
+import BoardPagination from "../components/BoardPagination";
 
 export default function Board({ Navbar, LocalData }: WordbookType) {
   const writer = LocalData?.email;
@@ -19,6 +20,15 @@ export default function Board({ Navbar, LocalData }: WordbookType) {
   const [getBoards, setGetBoards] = useState<Array<any>>([]);
   const [boardReadModal, setBoardReadModal] = useState<boolean>(false);
   const [boardRead, setBoardRead] = useState<Array<any>>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [postsPerPage, setPostsPerPage] = useState<number>(5);
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = getBoards.slice(firstPostIndex, lastPostIndex);
+  let pages = [];
+  for (let i = 1; i <= Math.ceil(getBoards.length / postsPerPage); i++) {
+    pages.push(i);
+  }
   const onSearchBoardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -27,7 +37,7 @@ export default function Board({ Navbar, LocalData }: WordbookType) {
       setSearchBoard(value);
     }
   };
-  const filterBoards = getBoards
+  const filterBoards = currentPosts
     // eslint-disable-next-line array-callback-return
     .filter((val) => {
       if (searchBoard === "") {
@@ -41,7 +51,7 @@ export default function Board({ Navbar, LocalData }: WordbookType) {
         <div
           id={item._id}
           key={key}
-          className="mx-auto w-full px-2 h-[80px] flex flex-col border-b border-gray-400 cursor-pointer hover:bg-gray-300/40"
+          className="mx-auto w-full px-2 h-[20%] flex flex-col border-b border-gray-400 cursor-pointer hover:bg-gray-300/40"
           onClick={(e) => onBoardRead({ e, id: item._id })}
         >
           <div className="w-full h-[50%] px-2 flex items-center">
@@ -97,9 +107,55 @@ export default function Board({ Navbar, LocalData }: WordbookType) {
               searchBoard={searchBoard}
               onCategorySelected={onCategorySelected}
             />
-            <div className="mx-auto w-full h-[80%] overflow-y-auto scrollbar-hide">
-              {filterBoards}
-            </div>
+            <div className="mx-auto w-full h-[70%]">{filterBoards}</div>
+            <BoardPagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pages={pages}
+            />
+            {/* <div className="mx-auto w-full h-[10%] flex items-center overflow-x-auto">
+              <div className="flex justify-center items-center w-[1000px] h-full">
+                <button
+                  className={
+                    currentPage === 1
+                      ? `${arrowCss} cursor-not-allowed`
+                      : `${arrowCss} hover:bg-blue-400 hover:text-white hover:border-none`
+                  }
+                  disabled={currentPage === 1 ? true : false}
+                  onClick={() => setCurrentPage((prev) => prev - 1)}
+                >
+                  <MdKeyboardArrowLeft className="w-full h-full rounded-full" />
+                </button>
+                {pages.map((page, key) => {
+                  return (
+                    <button
+                      className={
+                        page === currentPage
+                          ? `${paginationCss} bg-blue-400 text-white border-none`
+                          : `${paginationCss} hover:bg-blue-400 hover:text-white hover:border-none`
+                      }
+                      key={key}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+                <button
+                  className={
+                    currentPage === pages[pages.length - 1]
+                      ? `${arrowCss} cursor-not-allowed`
+                      : `${arrowCss} hover:bg-blue-400 hover:text-white hover:border-none`
+                  }
+                  disabled={
+                    currentPage === pages[pages.length - 1] ? true : false
+                  }
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                >
+                  <MdKeyboardArrowRight className="w-full h-full rounded-full" />
+                </button>
+              </div>
+            </div> */}
             <div className="mx-auto w-full h-[10%] flex justify-center items-center">
               <button
                 className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"

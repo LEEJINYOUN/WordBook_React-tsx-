@@ -182,3 +182,9 @@ export type BoardReadModalType = {
   boardRead: any[];
   writer: string | undefined;
 };
+
+export type BoardPaginationType = {
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  pages: number[];
+};
