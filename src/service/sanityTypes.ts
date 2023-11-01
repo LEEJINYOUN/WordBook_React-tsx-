@@ -1,4 +1,4 @@
-import { NavigateType, UserInfoType } from "../components/TypeAlias";
+import { NavigateType, UserInfoType } from "../types/type";
 
 export interface AuthCreateType extends NavigateType {
   email: string;

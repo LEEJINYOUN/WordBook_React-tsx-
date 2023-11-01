@@ -1,5 +1,5 @@
 import { AiOutlineExclamation } from "react-icons/ai";
-import { WithdrawalModalType } from "./TypeAlias";
+import { WithdrawalModalType } from "../types/type";
 import { accountDeleteActive } from "../service/user";
 
 export default function WithdrawalModal({

@@ -7,7 +7,7 @@ import {
 } from "../service/word";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-import { WordbookType } from "../components/TypeAlias";
+import { WordbookType } from "../types/type";
 import WordbookTop from "../components/WordbookTop";
 import WordbookItemLeft from "../components/WordbookItemLeft";
 import WordbookItemRight from "../components/WordbookItemRight";

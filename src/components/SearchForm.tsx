@@ -1,4 +1,4 @@
-import { SearchFormType } from "./TypeAlias";
+import { SearchFormType } from "../types/type";
 
 export default function SearchForm({
   searchWord,

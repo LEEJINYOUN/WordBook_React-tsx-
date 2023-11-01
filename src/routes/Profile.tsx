@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import UserInfo from "../components/UserInfo";
-import { CssType, ProfileType } from "../components/TypeAlias";
+import { CssType, ProfileType } from "../types/type";
 import { useState } from "react";
 import WithdrawalModal from "../components/WithdrawalModal";
 

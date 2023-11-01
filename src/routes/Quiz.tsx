@@ -21,7 +21,7 @@ import {
   OnClickType,
   QuizType,
   WordObjectType,
-} from "../components/TypeAlias";
+} from "../types/type";
 
 let INDEX = 0;
 const WORDS = 5;

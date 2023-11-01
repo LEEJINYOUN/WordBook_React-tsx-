@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OnBoardReadType, WordbookType } from "../components/TypeAlias";
+import { OnBoardReadType, WordbookType } from "../types/type";
 import {
   getBoardReadActive,
   getBoardsListQuestionActive,

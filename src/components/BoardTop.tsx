@@ -1,4 +1,4 @@
-import { BoardTopType } from "./TypeAlias";
+import { BoardTopType } from "../types/type";
 import BoardSearchForm from "./BoardSearchForm";
 
 export default function BoardTop({

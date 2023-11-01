@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import { LoginType } from "../components/TypeAlias";
+import { LoginType } from "../types/type";
+import GoToAuth from "../components/GoToAuth";
 
 export default function Login({
   inputMainCss,
@@ -21,13 +21,11 @@ export default function Login({
           navigate={navigate}
         />
         <div className="h-[15%] flex flex-row justify-center items-center">
-          <span className="text-base sm:text-lg mx-2">회원이 아닌가요?</span>
-          <NavLink
-            className="text-base sm:text-lg font-bold cursor-pointer text-red-400 duration-200 underline underline-offset-4 hover:text-red-500"
-            to="/register"
-          >
-            회원가입
-          </NavLink>
+          <GoToAuth
+            to={"/register"}
+            text={"회원이 아닌가요?"}
+            buttonText={"회원가입"}
+          />
         </div>
       </div>
     </section>

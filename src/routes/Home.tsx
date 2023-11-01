@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { CssType } from "../components/TypeAlias";
+import { CssType } from "../types/type";
 
 export default function Home() {
   const navCss: CssType = `m-auto w-[80%] h-[70px] flex justify-around items-center rounded-xl font-semibold text-lg text-white bg-lime-500 hover:bg-lime-600`;

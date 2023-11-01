@@ -1,4 +1,4 @@
-import { CurrentRecordModalType } from "./TypeAlias";
+import { CurrentRecordModalType } from "../types/type";
 
 export default function CurrentRecordModal({
   matchedArr,

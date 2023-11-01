@@ -1,5 +1,5 @@
 import { AiOutlineClose } from "react-icons/ai";
-import { BoardReadModalType, OnDeleteBoardType } from "./TypeAlias";
+import { BoardReadModalType, OnDeleteBoardType } from "../types/type";
 import { deleteBoardActive } from "../service/board";
 
 export default function BoardReadModal({

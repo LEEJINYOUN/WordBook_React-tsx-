@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { emailSignUpCheckActive } from "../service/user";
-import { RegisterType } from "./TypeAlias";
+import { emailSignUpCheckAPI } from "../service/user";
+import { RegisterType } from "../types/type";
 
 export default function RegisterForm({
   inputMainCss,
@@ -29,7 +29,7 @@ export default function RegisterForm({
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailSignUpCheckActive({
+    emailSignUpCheckAPI({
       email: userEmail,
       nickname: userNickname,
       name: userName,

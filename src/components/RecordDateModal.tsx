@@ -1,4 +1,4 @@
-import { RecordDateModalType } from "./TypeAlias";
+import { RecordDateModalType } from "../types/type";
 
 export default function RecordDateModal({
   getRecordDateMatched,

@@ -1,4 +1,4 @@
-import { BooleanChangeType } from "./TypeAlias";
+import { BooleanChangeType } from "../types/type";
 
 export default function QuizWaitForm({ booleanChange }: BooleanChangeType) {
   return (

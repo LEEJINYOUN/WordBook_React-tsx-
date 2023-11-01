@@ -1,4 +1,4 @@
-import { BoardPaginationType, CssType } from "./TypeAlias";
+import { BoardPaginationType, CssType } from "../types/type";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 export default function BoardPagination({

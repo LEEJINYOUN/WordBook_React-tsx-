@@ -1,4 +1,4 @@
-import { WordbookItemLeftType } from "./TypeAlias";
+import { WordbookItemLeftType } from "../types/type";
 
 export default function WordbookItemLeft({
   itemKey,

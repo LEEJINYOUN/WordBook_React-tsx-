@@ -1,6 +1,6 @@
 import React from "react";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
-import { QuizFormType } from "./TypeAlias";
+import { QuizFormType } from "../types/type";
 
 export default function QuizForm({
   btnStart,

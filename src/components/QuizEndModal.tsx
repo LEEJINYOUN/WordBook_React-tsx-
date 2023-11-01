@@ -1,4 +1,4 @@
-import { QuizEndModalType } from "./TypeAlias";
+import { QuizEndModalType } from "../types/type";
 
 export default function QuizEndModal({
   getWords,

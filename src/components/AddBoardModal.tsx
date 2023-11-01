@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { AddBoardModalType } from "./TypeAlias";
+import { AddBoardModalType } from "../types/type";
 import { addBoardActive } from "../service/board";
 
 export default function AddBoardModal({

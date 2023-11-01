@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { emailLoginActive } from "../service/user";
-import { LoginType } from "./TypeAlias";
+import { emailLoginCheckAPI } from "../service/user";
+import { LoginType } from "../types/type";
 
 export default function LoginForm({
   inputMainCss,
   inputInputCss,
   setUser,
-  navigate,
 }: LoginType) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
@@ -22,11 +21,10 @@ export default function LoginForm({
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailLoginActive({
+    emailLoginCheckAPI({
       email: userEmail,
       password: String(userPw),
       setUser,
-      navigate,
     });
   };
 

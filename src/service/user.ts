@@ -3,11 +3,11 @@ import {
   AuthDeleteType,
   AuthGetLoginType,
   AuthLoginType,
-} from "./ActiveTypeAlias";
-import { client } from "./sanity";
+} from "./sanityTypes";
+import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
 
-export async function addUserActive({
+export async function addUserAPI({
   email,
   nickname,
   name,
@@ -29,7 +29,7 @@ export async function addUserActive({
     });
 }
 
-export async function emailSignUpCheckActive({
+export async function emailSignUpCheckAPI({
   email,
   nickname,
   name,
@@ -41,7 +41,7 @@ export async function emailSignUpCheckActive({
     .then((res) =>
       res !== null
         ? alert("존재하는 아이디입니다.")
-        : addUserActive({
+        : addUserAPI({
             email,
             nickname,
             name,
@@ -51,11 +51,7 @@ export async function emailSignUpCheckActive({
     );
 }
 
-export async function getEmailLoginActive({
-  email,
-  setUser,
-  navigate,
-}: AuthGetLoginType) {
+export async function emailLoginAPI({ email, setUser }: AuthGetLoginType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
     .then((res) => {
@@ -70,11 +66,10 @@ export async function getEmailLoginActive({
     });
 }
 
-export async function emailLoginActive({
+export async function emailLoginCheckAPI({
   email,
   password,
   setUser,
-  navigate,
 }: AuthLoginType) {
   return client
     .fetch(
@@ -83,7 +78,7 @@ export async function emailLoginActive({
     .then((res) =>
       res.password === false
         ? alert("비밀번호가 다릅니다")
-        : getEmailLoginActive({ email, setUser, navigate })
+        : emailLoginAPI({ email, setUser })
     );
 }
 

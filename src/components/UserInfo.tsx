@@ -1,4 +1,4 @@
-import { GetUserInfoType } from "./TypeAlias";
+import { GetUserInfoType } from "../types/type";
 
 export default function UserInfo(LocalData: GetUserInfoType) {
   return (

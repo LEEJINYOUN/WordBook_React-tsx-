@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { CssType } from "./TypeAlias";
+import { CssType } from "../types/type";
 import { useLocation } from "react-router-dom";
 
 export default function Navbar() {

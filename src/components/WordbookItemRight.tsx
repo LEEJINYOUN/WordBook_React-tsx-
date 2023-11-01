@@ -1,7 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import { wordBookmarkCheckActive, wordDeleteActive } from "../service/word";
-import { OnClickType, WordbookItemRightType } from "./TypeAlias";
+import { OnClickType, WordbookItemRightType } from "../types/type";
 
 export default function WordbookItemRight({
   bookmark,

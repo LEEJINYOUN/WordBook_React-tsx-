@@ -2,8 +2,8 @@ import {
   AddBoardType,
   GetBoardReadActiveType,
   GetBoardsListActiveType,
-} from "./ActiveTypeAlias";
-import { client } from "./sanity";
+} from "./sanityTypes";
+import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
 
 export async function addBoardActive({

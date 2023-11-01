@@ -1,4 +1,4 @@
-import { BoardSearchFormType } from "./TypeAlias";
+import { BoardSearchFormType } from "../types/type";
 
 export default function BoardSearchForm({
   onSearchBoardChange,

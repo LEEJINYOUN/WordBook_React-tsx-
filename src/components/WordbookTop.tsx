@@ -1,5 +1,5 @@
 import SearchForm from "./SearchForm";
-import { WordbookTopType } from "./TypeAlias";
+import { WordbookTopType } from "../types/type";
 
 export default function WordbookTop({
   searchWord,

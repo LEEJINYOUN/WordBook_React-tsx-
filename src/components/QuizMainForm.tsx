@@ -1,4 +1,4 @@
-import { QuizMainFormType } from "./TypeAlias";
+import { QuizMainFormType } from "../types/type";
 
 export default function QuizMainForm({
   WORDS,

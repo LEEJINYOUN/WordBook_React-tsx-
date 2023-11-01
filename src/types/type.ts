@@ -8,6 +8,12 @@ export type UserInfoType = {
   name: string;
 };
 
+export interface GoToAuthType {
+  to: string;
+  text: string;
+  buttonText: string;
+}
+
 export interface RegisterType extends NavigateType {
   inputMainCss: CssType;
   inputInputCss: CssType;

@@ -1,4 +1,4 @@
-import { RecordsReadModalType } from "./TypeAlias";
+import { RecordsReadModalType } from "../types/type";
 
 export default function RecordsReadModal({
   getRecords,

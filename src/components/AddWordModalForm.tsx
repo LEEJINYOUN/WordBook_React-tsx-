@@ -1,4 +1,4 @@
-import { AddWordModalFormType, CssType } from "./TypeAlias";
+import { AddWordModalFormType, CssType } from "../types/type";
 
 export default function AddWordModalForm({
   enWord,

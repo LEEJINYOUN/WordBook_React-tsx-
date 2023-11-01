@@ -9,7 +9,7 @@ import Board from "../routes/Board";
 import Quiz from "../routes/Quiz";
 import Profile from "../routes/Profile";
 import Navbar from "./Navbar";
-import { CssType, UserInfoType } from "./TypeAlias";
+import { CssType, UserInfoType } from "../types/type";
 import { useQuery } from "react-query";
 
 export default function RoutesInit() {
@@ -37,7 +37,6 @@ export default function RoutesInit() {
               inputMainCss={inputMainCss}
               inputInputCss={inputInputCss}
               setUser={setUser}
-              navigate={navigate}
             />
           ) : (
             <Home />

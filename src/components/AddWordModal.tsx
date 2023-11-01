@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import AddWordModalForm from "./AddWordModalForm";
 import { wordCheckActive } from "../service/word";
-import { AddWordModalType } from "./TypeAlias";
+import { AddWordModalType } from "../types/type";
 
 export default function AddWordModal({
   onAddModal,
