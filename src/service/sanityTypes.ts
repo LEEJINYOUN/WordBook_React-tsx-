@@ -1,17 +1,17 @@
-import { NavigateType, UserInfoType } from "../types/type";
+import { AuthUserInfoType, NavigateType, UserInfoType } from "../types/type";
 
-export interface AuthCreateType extends NavigateType {
+export interface EmailSignUpType extends NavigateType {
   email: string;
   nickname: string;
   name: string;
   password: string;
 }
 
-export interface AuthGetLoginType extends NavigateType {
+export interface EmailLoginType extends NavigateType {
   email: string;
-  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+  setCurrentUser: React.Dispatch<React.SetStateAction<AuthUserInfoType | null>>;
 }
-export interface AuthLoginType extends AuthGetLoginType, NavigateType {
+export interface EmailLoginCheckType extends EmailLoginType {
   password: string;
 }
 

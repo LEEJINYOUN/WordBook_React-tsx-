@@ -19,8 +19,20 @@ export interface RegisterType extends NavigateType {
   inputInputCss: CssType;
 }
 
-export interface LoginType extends RegisterType, NavigateType {
-  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+export interface AuthContextType {
+  currentUser: any;
+  setCurrentUser: any;
+}
+
+export interface AuthContextProviderType {
+  children: React.ReactNode;
+}
+
+export interface AuthUserInfoType {
+  id: string;
+  email: string;
+  nickname: string;
+  name: string;
 }
 
 export interface WordbookType {

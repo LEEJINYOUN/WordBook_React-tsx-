@@ -1,8 +1,8 @@
 import {
-  AuthCreateType,
+  EmailSignUpType,
+  EmailLoginCheckType,
+  EmailLoginType,
   AuthDeleteType,
-  AuthGetLoginType,
-  AuthLoginType,
 } from "./sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,7 @@ export async function addUserAPI({
   name,
   password,
   navigate,
-}: AuthCreateType) {
+}: EmailSignUpType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),
@@ -35,7 +35,7 @@ export async function emailSignUpCheckAPI({
   name,
   password,
   navigate,
-}: AuthCreateType) {
+}: EmailSignUpType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
     .then((res) =>
@@ -51,7 +51,11 @@ export async function emailSignUpCheckAPI({
     );
 }
 
-export async function emailLoginAPI({ email, setUser }: AuthGetLoginType) {
+export async function emailLoginAPI({
+  email,
+  setCurrentUser,
+  navigate,
+}: EmailLoginType) {
   return client
     .fetch(`*[_type == "user" && email == "${email}"][0]`)
     .then((res) => {
@@ -61,16 +65,18 @@ export async function emailLoginAPI({ email, setUser }: AuthGetLoginType) {
         nickname: res.nickname,
         name: res.name,
       };
-      setUser(userObject);
+      setCurrentUser(userObject);
       localStorage.setItem("userInfo", JSON.stringify(userObject));
+      navigate("/");
     });
 }
 
 export async function emailLoginCheckAPI({
   email,
   password,
-  setUser,
-}: AuthLoginType) {
+  setCurrentUser,
+  navigate,
+}: EmailLoginCheckType) {
   return client
     .fetch(
       `*[_type == "user" && email == "${email}"][0]{"password" : password == "${password}"}`
@@ -78,7 +84,7 @@ export async function emailLoginCheckAPI({
     .then((res) =>
       res.password === false
         ? alert("비밀번호가 다릅니다")
-        : emailLoginAPI({ email, setUser })
+        : emailLoginAPI({ email, setCurrentUser, navigate })
     );
 }
 

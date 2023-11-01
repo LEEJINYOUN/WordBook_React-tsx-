@@ -3,6 +3,7 @@ import "./styles/index.css";
 import App from "./App";
 import { HashRouter, BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AuthContextProvider } from "./utils/AuthContext";
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </QueryClientProvider>
   </BrowserRouter>
 );

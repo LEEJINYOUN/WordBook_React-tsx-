@@ -1,13 +1,12 @@
 import LoginForm from "../components/LoginForm";
-import { LoginType } from "../types/type";
+import { RegisterType } from "../types/type";
 import GoToAuth from "../components/GoToAuth";
 
 export default function Login({
   inputMainCss,
   inputInputCss,
-  setUser,
   navigate,
-}: LoginType) {
+}: RegisterType) {
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[600px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
@@ -17,7 +16,6 @@ export default function Login({
         <LoginForm
           inputMainCss={inputMainCss}
           inputInputCss={inputInputCss}
-          setUser={setUser}
           navigate={navigate}
         />
         <div className="h-[15%] flex flex-row justify-center items-center">

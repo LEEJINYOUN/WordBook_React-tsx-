@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { emailLoginCheckAPI } from "../service/user";
-import { LoginType } from "../types/type";
+import { RegisterType } from "../types/type";
+import { AuthContext } from "../utils/AuthContext";
 
 export default function LoginForm({
   inputMainCss,
   inputInputCss,
-  setUser,
-}: LoginType) {
+  navigate,
+}: RegisterType) {
+  const userContext = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +26,8 @@ export default function LoginForm({
     emailLoginCheckAPI({
       email: userEmail,
       password: String(userPw),
-      setUser,
+      setCurrentUser: userContext.setCurrentUser,
+      navigate,
     });
   };
 
