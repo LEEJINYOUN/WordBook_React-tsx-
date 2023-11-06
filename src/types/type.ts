@@ -35,11 +35,6 @@ export interface AuthUserInfoType {
   name: string;
 }
 
-export interface WordbookType {
-  Navbar: NavbarType;
-  LocalData: UserInfoType | null;
-}
-
 export interface OnClickType {
   e: React.MouseEvent<SVGElement, MouseEvent>;
   id: string;
@@ -65,7 +60,9 @@ export interface AddWordModalFormType extends WordObjectType {
   addWordSubmit: React.FormEventHandler;
 }
 
-export interface QuizType extends RegisterType, WordbookType, NavbarType {}
+export interface QuizType extends RegisterType {
+  navigate: any;
+}
 
 export type WordObjectType = {
   enWord: string;
@@ -131,12 +128,7 @@ export type RecordDateModalType = {
   onCurrentRecordClose: () => void;
 };
 
-export type GetUserInfoType = {
-  LocalData: UserInfoType | null;
-};
-
 export interface ProfileType {
-  Navbar: NavbarType;
   navigate: any;
 }
 

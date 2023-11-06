@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { OnBoardReadType, WordbookType } from "../types/type";
+import { useContext, useState } from "react";
+import { OnBoardReadType } from "../types/type";
 import {
   getBoardReadActive,
   getBoardsListQuestionActive,
@@ -12,9 +12,12 @@ import BoardTop from "../components/BoardTop";
 import AddBoardModal from "../components/AddBoardModal";
 import BoardReadModal from "../components/BoardReadModal";
 import BoardPagination from "../components/BoardPagination";
+import { AuthContext } from "../utils/AuthContext";
+import Navbar from "../components/Navbar";
 
-export default function Board({ Navbar, LocalData }: WordbookType) {
-  const writer = LocalData?.email;
+export default function Board() {
+  const userContext = useContext(AuthContext);
+  const writer = userContext.currentUser?.email;
   const [searchBoard, setSearchBoard] = useState<string>("");
   const [addBoardModal, setAddBoardModal] = useState<boolean>(false);
   const [getBoards, setGetBoards] = useState<Array<any>>([]);

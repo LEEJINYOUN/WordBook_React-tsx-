@@ -3,21 +3,18 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Register from "../pages/Register";
-import Wordbook from "../routes/Wordbook";
-import Bookmark from "../routes/Bookmark";
-import Board from "../routes/Board";
-import Quiz from "../routes/Quiz";
+import Wordbook from "../pages/Wordbook";
+import Bookmark from "../pages/Bookmark";
+import Board from "../pages/Board";
+import Quiz from "../pages/Quiz";
 import Profile from "../pages/Profile";
-import Navbar from "./Navbar";
-import { CssType, UserInfoType } from "../types/type";
+import { CssType } from "../types/type";
 import { AuthContext } from "../utils/AuthContext";
 
 export default function RoutesInit() {
   const userContext = useContext(AuthContext);
   const inputMainCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
   const inputInputCss: CssType = `my-3 border border-gray-300`;
-  const localStore = localStorage.getItem("userInfo");
-  const LocalData: UserInfoType = localStore && JSON.parse(localStore);
   const navigate = useNavigate();
 
   return (
@@ -46,34 +43,20 @@ export default function RoutesInit() {
           />
         }
       />
-      <Route
-        path="/wordbook"
-        element={<Wordbook Navbar={Navbar} LocalData={LocalData} />}
-      />
-      <Route
-        path="/bookmark"
-        element={<Bookmark Navbar={Navbar} LocalData={LocalData} />}
-      />
-      <Route
-        path="/board"
-        element={<Board Navbar={Navbar} LocalData={LocalData} />}
-      />
+      <Route path="/wordbook" element={<Wordbook />} />
+      <Route path="/bookmark" element={<Bookmark />} />
+      <Route path="/board" element={<Board />} />
       <Route
         path="/quiz"
         element={
           <Quiz
-            Navbar={Navbar}
-            LocalData={LocalData}
             inputMainCss={inputMainCss}
             inputInputCss={inputInputCss}
             navigate={navigate}
           />
         }
       />
-      <Route
-        path="/profile"
-        element={<Profile Navbar={Navbar} navigate={navigate} />}
-      />
+      <Route path="/profile" element={<Profile navigate={navigate} />} />
     </Routes>
   );
 }

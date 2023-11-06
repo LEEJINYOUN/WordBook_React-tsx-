@@ -4,8 +4,9 @@ import { CssType, ProfileType } from "../types/type";
 import { useContext, useState } from "react";
 import WithdrawalModal from "../components/WithdrawalModal";
 import { AuthContext } from "../utils/AuthContext";
+import Navbar from "../components/Navbar";
 
-export default function Profile({ Navbar, navigate }: ProfileType) {
+export default function Profile({ navigate }: ProfileType) {
   const userContext = useContext(AuthContext);
   const profileBtnCss: CssType = `bg-blue-300 flex justify-center items-center ml-6 w-[100px] h-10 font-semibold text-white rounded-lg hover:font-bold duration-200`;
   const [withdrawalModalOpen, setWithdrawalModalOpen] = useState(false);

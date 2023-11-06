@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AddWordModal from "../components/AddWordModal";
 import {
-  getWordListBookmarkActive,
-  getWordListBookmarkEnWordOrderActive,
-  getWordListBookmarkKrWordOrderActive,
+  getWordListActive,
+  getWordListEnWordOrderActive,
+  getWordListKrWordOrderActive,
 } from "../service/word";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-import { WordbookType } from "../types/type";
-import BookmarkTop from "../components/BookmarkTop";
+import WordbookTop from "../components/WordbookTop";
 import WordbookItemLeft from "../components/WordbookItemLeft";
 import WordbookItemRight from "../components/WordbookItemRight";
+import { AuthContext } from "../utils/AuthContext";
+import Navbar from "../components/Navbar";
 
-export default function Bookmark({ Navbar, LocalData }: WordbookType) {
-  const writer = LocalData?.email;
+export default function Wordbook() {
+  const userContext = useContext(AuthContext);
+  const writer = userContext.currentUser?.email;
+  const today = new Date();
   const [searchWord, setSearchWord] = useState<string>("");
+  const [addModal, setAddModal] = useState<boolean>(false);
+  const [enWord, setEnWord] = useState<string>("");
+  const [krWord, setKrWord] = useState<string>("");
   const [getWords, setGetWords] = useState<Array<any>>([]);
   const [orderSelect, setOrderSelect] = useState<string>("order");
 
@@ -21,16 +28,16 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
     let value = e.target.value;
     if (value === "order") {
       setOrderSelect("order");
-      localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkActive({ writer, setGetWords });
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListActive({ writer, setGetWords });
     } else if (value === "enOrder") {
       setOrderSelect("enOrder");
-      localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkEnWordOrderActive({ writer, setGetWords });
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListEnWordOrderActive({ writer, setGetWords });
     } else if (value === "krOrder") {
       setOrderSelect("krOrder");
-      localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkKrWordOrderActive({ writer, setGetWords });
+      localStorage.setItem("wordbookOrder", JSON.stringify(value));
+      getWordListKrWordOrderActive({ writer, setGetWords });
     }
   };
 
@@ -41,6 +48,12 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
     if (name === "search") {
       setSearchWord(value);
     }
+  };
+
+  const onAddModal = () => {
+    setAddModal((prev) => !prev);
+    setEnWord("");
+    setKrWord("");
   };
 
   const filterWords = getWords
@@ -71,19 +84,18 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
       );
     });
 
-  const localOrder = localStorage.getItem("bookmarkOrder");
+  const localOrder = localStorage.getItem("wordbookOrder");
   const localGetOrder = localOrder && JSON.parse(localOrder);
 
-  const { isLoading } = useQuery("getWordBookmark", () => {
+  const { isLoading } = useQuery("getWords", () => {
     if (localGetOrder === null || localGetOrder === "order") {
-      getWordListBookmarkActive({ writer, setGetWords });
+      getWordListActive({ writer, setGetWords });
     } else if (localGetOrder === "enOrder") {
-      getWordListBookmarkEnWordOrderActive({ writer, setGetWords });
+      getWordListEnWordOrderActive({ writer, setGetWords });
     } else if (localGetOrder === "krOrder") {
-      getWordListBookmarkKrWordOrderActive({ writer, setGetWords });
+      getWordListKrWordOrderActive({ writer, setGetWords });
     }
   });
-
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">
@@ -94,15 +106,34 @@ export default function Bookmark({ Navbar, LocalData }: WordbookType) {
           </span>
         ) : (
           <main className="h-[90%] flex flex-col">
-            <BookmarkTop
+            <WordbookTop
               searchWord={searchWord}
               onSearchChange={onSearchChange}
               localGetOrder={localGetOrder}
               onOrderSelected={onOrderSelected}
             />
-            <div className="mx-auto w-full h-[90%] overflow-y-auto scrollbar-hide">
+            <div className="mx-auto w-full h-[80%] overflow-y-auto scrollbar-hide">
               {filterWords}
             </div>
+            <div className="mx-auto w-full h-[10%] flex justify-center items-center">
+              <button
+                className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
+                onClick={onAddModal}
+              >
+                단어 등록
+              </button>
+            </div>
+            {addModal === true && (
+              <AddWordModal
+                onAddModal={onAddModal}
+                writer={writer}
+                today={today}
+                enWord={enWord}
+                setEnWord={setEnWord}
+                krWord={krWord}
+                setKrWord={setKrWord}
+              />
+            )}
           </main>
         )}
       </div>

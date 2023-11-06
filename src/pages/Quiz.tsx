@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import QuizMainForm from "../components/QuizMainForm";
 import { getRecordsListActive, getWordListActive } from "../service/word";
 import RecordsReadModal from "../components/RecordsReadModal";
@@ -22,6 +22,8 @@ import {
   QuizType,
   WordObjectType,
 } from "../types/type";
+import { AuthContext } from "../utils/AuthContext";
+import Navbar from "../components/Navbar";
 
 let INDEX = 0;
 const WORDS = 5;
@@ -29,13 +31,12 @@ let matchedArr: WordObjectType[] = [];
 let NotMatchedArr: WordObjectType[] = [];
 
 export default function Quiz({
-  Navbar,
-  LocalData,
   inputMainCss,
   inputInputCss,
   navigate,
 }: QuizType) {
-  const writer = LocalData?.email;
+  const userContext = useContext(AuthContext);
+  const writer = userContext.currentUser?.email;
   const now = new Date();
   const year = now.getFullYear();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
