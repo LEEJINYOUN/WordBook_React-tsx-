@@ -1,17 +1,23 @@
 import { AiOutlineExclamation } from "react-icons/ai";
 import { WithdrawalModalType } from "../types/type";
-import { accountDeleteActive } from "../service/user";
+import { accountDeleteAPI } from "../service/user";
+import { useContext } from "react";
+import { AuthContext } from "../utils/AuthContext";
 
 export default function WithdrawalModal({
   modalToggle,
-  LocalData,
-  setUser,
   navigate,
 }: WithdrawalModalType) {
+  const userContext = useContext(AuthContext);
   const accountDelete = () => {
-    let email = LocalData?.email;
-    accountDeleteActive({ email, setUser, navigate });
+    let email = userContext.currentUser?.email;
+    accountDeleteAPI({
+      email,
+      setCurrentUser: userContext.setCurrentUser,
+      navigate,
+    });
   };
+
   return (
     <div className="z-100 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[50%] rounded-2xl">

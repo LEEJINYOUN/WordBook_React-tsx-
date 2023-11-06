@@ -88,9 +88,9 @@ export async function emailLoginCheckAPI({
     );
 }
 
-export async function accountDeleteActive({
+export async function accountDeleteAPI({
   email,
-  setUser,
+  setCurrentUser,
   navigate,
 }: AuthDeleteType) {
   return (client.delete({ query: `*[_type == "user" && email == "${email}"]` }),
@@ -98,7 +98,7 @@ export async function accountDeleteActive({
   client.delete({ query: `*[_type == "quiz" && writer == "${email}"]` }),
   client.delete({ query: `*[_type == "board" && writer == "${email}"]` })).then(
     () => {
-      setUser(null);
+      setCurrentUser(null);
       localStorage.clear();
       navigate("/");
     }

@@ -135,9 +135,8 @@ export type GetUserInfoType = {
   LocalData: UserInfoType | null;
 };
 
-export interface ProfileType extends GetUserInfoType {
+export interface ProfileType {
   Navbar: NavbarType;
-  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
   navigate: any;
 }
 
@@ -145,9 +144,8 @@ export type BooleanChangeType = {
   booleanChange: any;
 };
 
-export interface WithdrawalModalType extends GetUserInfoType {
+export interface WithdrawalModalType {
   modalToggle: () => void;
-  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
   navigate: any;
 }
 

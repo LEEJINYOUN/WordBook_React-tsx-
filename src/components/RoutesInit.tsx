@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
@@ -7,7 +7,7 @@ import Wordbook from "../routes/Wordbook";
 import Bookmark from "../routes/Bookmark";
 import Board from "../routes/Board";
 import Quiz from "../routes/Quiz";
-import Profile from "../routes/Profile";
+import Profile from "../pages/Profile";
 import Navbar from "./Navbar";
 import { CssType, UserInfoType } from "../types/type";
 import { AuthContext } from "../utils/AuthContext";
@@ -16,7 +16,6 @@ export default function RoutesInit() {
   const userContext = useContext(AuthContext);
   const inputMainCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[50px] rounded-lg text-base sm:text-lg outline-none`;
   const inputInputCss: CssType = `my-3 border border-gray-300`;
-  const [user, setUser] = useState<UserInfoType | null>(null);
   const localStore = localStorage.getItem("userInfo");
   const LocalData: UserInfoType = localStore && JSON.parse(localStore);
   const navigate = useNavigate();
@@ -73,14 +72,7 @@ export default function RoutesInit() {
       />
       <Route
         path="/profile"
-        element={
-          <Profile
-            Navbar={Navbar}
-            LocalData={LocalData}
-            setUser={setUser}
-            navigate={navigate}
-          />
-        }
+        element={<Profile Navbar={Navbar} navigate={navigate} />}
       />
     </Routes>
   );

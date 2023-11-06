@@ -1,4 +1,4 @@
-import { AuthUserInfoType, NavigateType, UserInfoType } from "../types/type";
+import { AuthUserInfoType, NavigateType } from "../types/type";
 
 export interface EmailSignUpType extends NavigateType {
   email: string;
@@ -63,7 +63,7 @@ export interface QuizStopType extends ResultPushType {
 
 export type AuthDeleteType = {
   email: string | undefined;
-  setUser: React.Dispatch<React.SetStateAction<UserInfoType | null>>;
+  setCurrentUser: React.Dispatch<React.SetStateAction<AuthUserInfoType | null>>;
   navigate: any;
 };
 
