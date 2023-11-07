@@ -1,18 +1,18 @@
 import {
-  AddBoardType,
-  GetBoardReadActiveType,
-  GetBoardsListActiveType,
+  AddBoardAPIType,
+  FetchBoardReadAPIType,
+  FetchBoardsListAPIType,
 } from "./sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
 
-export async function addBoardActive({
+export async function addBoardAPI({
   writer,
   category,
   title,
   content,
   today,
-}: AddBoardType) {
+}: AddBoardAPIType) {
   return client
     .createIfNotExists({
       _id: uuidv4(),
@@ -28,9 +28,9 @@ export async function addBoardActive({
     });
 }
 
-export async function getBoardsListActive({
+export async function fetchBoardsListAPI({
   setGetBoards,
-}: GetBoardsListActiveType) {
+}: FetchBoardsListAPIType) {
   return client
     .fetch(
       `*[_type == "board"] | order(today desc)
@@ -41,9 +41,9 @@ export async function getBoardsListActive({
     });
 }
 
-export async function getBoardsListQuestionActive({
+export async function fetchBoardsListQuestionAPI({
   setGetBoards,
-}: GetBoardsListActiveType) {
+}: FetchBoardsListAPIType) {
   return client
     .fetch(
       `*[_type == "board"  && category == "질문"] | order(today desc)
@@ -54,9 +54,9 @@ export async function getBoardsListQuestionActive({
     });
 }
 
-export async function getBoardsListShareActive({
+export async function fetchBoardsListShareAPI({
   setGetBoards,
-}: GetBoardsListActiveType) {
+}: FetchBoardsListAPIType) {
   return client
     .fetch(
       `*[_type == "board"  && category == "공유"] | order(today desc)
@@ -67,11 +67,11 @@ export async function getBoardsListShareActive({
     });
 }
 
-export async function getBoardReadActive({
+export async function fetchBoardReadAPI({
   id,
   setBoardRead,
   setBoardReadModal,
-}: GetBoardReadActiveType) {
+}: FetchBoardReadAPIType) {
   return client
     .fetch(
       `*[_type == "board" && _id == "${id}"]
@@ -83,7 +83,7 @@ export async function getBoardReadActive({
     });
 }
 
-export async function deleteBoardActive(id: string) {
+export async function deleteBoardAPI(id: string) {
   return client
     .delete({ query: `*[_type == "board" && _id == "${id}"]` })
     .then(() => window.location.reload());

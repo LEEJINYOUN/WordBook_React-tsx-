@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { BoardReadModalType, OnDeleteBoardType } from "../types/type";
-import { deleteBoardActive } from "../service/board";
+import { deleteBoardAPI } from "../service/board";
 
 export default function BoardReadModal({
   setBoardReadModal,
@@ -9,8 +9,9 @@ export default function BoardReadModal({
 }: BoardReadModalType) {
   const onDeleteBoard = async ({ e, id }: OnDeleteBoardType) => {
     e.preventDefault();
-    deleteBoardActive(id);
+    deleteBoardAPI(id);
   };
+
   return (
     <div className="z-120 absolute top-0 left-0 w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[80%] rounded-2xl">
@@ -71,7 +72,7 @@ export default function BoardReadModal({
           >
             닫기
           </button>
-          {boardRead[0].writer === writer ? (
+          {boardRead[0].writer === writer && (
             <button
               className="bg-blue-300 w-[100px] h-9 text-white rounded-lg hover:bg-red-400 hover:font-bold duration-200"
               id={boardRead[0]._id}
@@ -79,8 +80,6 @@ export default function BoardReadModal({
             >
               삭제하기
             </button>
-          ) : (
-            <></>
           )}
         </div>
       </div>

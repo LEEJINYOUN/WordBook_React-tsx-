@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { OnBoardReadType } from "../types/type";
 import {
-  getBoardReadActive,
-  getBoardsListQuestionActive,
-  getBoardsListShareActive,
+  fetchBoardReadAPI,
+  fetchBoardsListAPI,
+  fetchBoardsListQuestionAPI,
+  fetchBoardsListShareAPI,
 } from "../service/board";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-import { getBoardsListActive } from "../service/board";
 import BoardTop from "../components/BoardTop";
 import AddBoardModal from "../components/AddBoardModal";
 import BoardReadModal from "../components/BoardReadModal";
@@ -19,9 +19,9 @@ export default function Board() {
   const userContext = useContext(AuthContext);
   const writer = userContext.currentUser?.email;
   const [searchBoard, setSearchBoard] = useState<string>("");
-  const [addBoardModal, setAddBoardModal] = useState<boolean>(false);
+  const [addBoardModal, setAddBoardModal] = useState(false);
   const [getBoards, setGetBoards] = useState<Array<any>>([]);
-  const [boardReadModal, setBoardReadModal] = useState<boolean>(false);
+  const [boardReadModal, setBoardReadModal] = useState(false);
   const [boardRead, setBoardRead] = useState<Array<any>>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage, setPostsPerPage] = useState<number>(5);
@@ -74,13 +74,13 @@ export default function Board() {
   const onCategorySelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
     let value = e.target.value;
     if (value === "all") {
-      getBoardsListActive({ setGetBoards });
+      fetchBoardsListAPI({ setGetBoards });
       setCurrentPage(1);
     } else if (value === "question") {
-      getBoardsListQuestionActive({ setGetBoards });
+      fetchBoardsListQuestionAPI({ setGetBoards });
       setCurrentPage(1);
     } else if (value === "share") {
-      getBoardsListShareActive({ setGetBoards });
+      fetchBoardsListShareAPI({ setGetBoards });
       setCurrentPage(1);
     }
   };
@@ -91,11 +91,11 @@ export default function Board() {
 
   const onBoardRead = async ({ e, id }: OnBoardReadType) => {
     e.preventDefault();
-    getBoardReadActive({ id, setBoardRead, setBoardReadModal });
+    fetchBoardReadAPI({ id, setBoardRead, setBoardReadModal });
   };
 
   const { isLoading } = useQuery("getBoards", () => {
-    getBoardsListActive({ setGetBoards });
+    fetchBoardsListAPI({ setGetBoards });
   });
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { AddBoardModalType } from "../types/type";
-import { addBoardActive } from "../service/board";
+import { addBoardAPI } from "../service/board";
 
 export default function AddBoardModal({
   onAddBoardModalToggle,
@@ -26,7 +26,7 @@ export default function AddBoardModal({
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (category !== "" && title !== "" && content !== "") {
-      addBoardActive({
+      addBoardAPI({
         writer,
         category,
         title,
@@ -42,6 +42,7 @@ export default function AddBoardModal({
     setContent("");
     onAddBoardModalToggle();
   };
+
   return (
     <div className="z-50 absolute top-0 left-0  w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[75%] rounded-2xl">

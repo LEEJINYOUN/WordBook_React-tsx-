@@ -67,7 +67,7 @@ export type AuthDeleteType = {
   navigate: any;
 };
 
-export type AddBoardType = {
+export type AddBoardAPIType = {
   writer: string | undefined;
   category: string;
   title: string;
@@ -75,11 +75,11 @@ export type AddBoardType = {
   today: string;
 };
 
-export type GetBoardsListActiveType = {
+export type FetchBoardsListAPIType = {
   setGetBoards: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export type GetBoardReadActiveType = {
+export type FetchBoardReadAPIType = {
   id: string;
   setBoardRead: React.Dispatch<React.SetStateAction<any[]>>;
   setBoardReadModal: React.Dispatch<React.SetStateAction<boolean>>;
