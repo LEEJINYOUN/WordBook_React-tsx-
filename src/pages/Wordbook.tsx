@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import AddWordModal from "../components/AddWordModal";
 import {
-  getWordListActive,
-  getWordListEnWordOrderActive,
-  getWordListKrWordOrderActive,
+  fetchWordListAPI,
+  fetchWordListEnWordOrderAPI,
+  fetchWordListKrWordOrderAPI,
 } from "../service/word";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
@@ -18,7 +18,7 @@ export default function Wordbook() {
   const writer = userContext.currentUser?.email;
   const today = new Date();
   const [searchWord, setSearchWord] = useState<string>("");
-  const [addModal, setAddModal] = useState<boolean>(false);
+  const [addModal, setAddModal] = useState(false);
   const [enWord, setEnWord] = useState<string>("");
   const [krWord, setKrWord] = useState<string>("");
   const [getWords, setGetWords] = useState<Array<any>>([]);
@@ -29,15 +29,15 @@ export default function Wordbook() {
     if (value === "order") {
       setOrderSelect("order");
       localStorage.setItem("wordbookOrder", JSON.stringify(value));
-      getWordListActive({ writer, setGetWords });
+      fetchWordListAPI({ writer, setGetWords });
     } else if (value === "enOrder") {
       setOrderSelect("enOrder");
       localStorage.setItem("wordbookOrder", JSON.stringify(value));
-      getWordListEnWordOrderActive({ writer, setGetWords });
+      fetchWordListEnWordOrderAPI({ writer, setGetWords });
     } else if (value === "krOrder") {
       setOrderSelect("krOrder");
       localStorage.setItem("wordbookOrder", JSON.stringify(value));
-      getWordListKrWordOrderActive({ writer, setGetWords });
+      fetchWordListKrWordOrderAPI({ writer, setGetWords });
     }
   };
 
@@ -89,13 +89,14 @@ export default function Wordbook() {
 
   const { isLoading } = useQuery("getWords", () => {
     if (localGetOrder === null || localGetOrder === "order") {
-      getWordListActive({ writer, setGetWords });
+      fetchWordListAPI({ writer, setGetWords });
     } else if (localGetOrder === "enOrder") {
-      getWordListEnWordOrderActive({ writer, setGetWords });
+      fetchWordListEnWordOrderAPI({ writer, setGetWords });
     } else if (localGetOrder === "krOrder") {
-      getWordListKrWordOrderActive({ writer, setGetWords });
+      fetchWordListKrWordOrderAPI({ writer, setGetWords });
     }
   });
+
   return (
     <section className="bg-gray-300 h-[100vh]">
       <div className="bg-white w-[450px] sm:w-[500px] h-[750px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-2xl rounded-2xl">

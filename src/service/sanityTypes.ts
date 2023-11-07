@@ -23,12 +23,12 @@ export interface AddWordObjectType {
   today: object;
 }
 
-export interface AddWordCheckType extends AddWordObjectType {
+export interface AddWordCheckAPIType extends AddWordObjectType {
   setEnWord: React.Dispatch<React.SetStateAction<string>>;
   setKrWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export type GetWordsListType = {
+export type FetchWordsListAPIType = {
   writer: string | undefined;
   setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
 };

@@ -1,6 +1,6 @@
 import { AiFillStar } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
-import { wordBookmarkCheckActive, wordDeleteActive } from "../service/word";
+import { wordBookmarkCheckAPI, wordDeleteAPI } from "../service/word";
 import { OnClickType, WordbookItemRightType } from "../types/type";
 
 export default function WordbookItemRight({
@@ -9,13 +9,14 @@ export default function WordbookItemRight({
 }: WordbookItemRightType) {
   const onBookmark = async ({ e, id }: OnClickType) => {
     e.preventDefault();
-    wordBookmarkCheckActive({ id });
+    wordBookmarkCheckAPI({ id });
   };
 
   const onDelete = async ({ e, id }: OnClickType) => {
     e.preventDefault();
-    wordDeleteActive({ id });
+    wordDeleteAPI({ id });
   };
+
   return (
     <div className="w-[10%] h-full">
       <div className=" flex flex-col w-full h-[50%] justify-center items-center">

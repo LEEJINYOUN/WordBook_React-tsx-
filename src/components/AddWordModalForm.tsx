@@ -7,6 +7,7 @@ export default function AddWordModalForm({
   addWordSubmit,
 }: AddWordModalFormType) {
   const AddWordModalFormCss: CssType = `mx-auto px-6 flex justify-center items-center w-[85%] h-[45px] rounded-lg text-base sm:text-lg outline-none`;
+
   return (
     <form
       className="h-[90%] flex flex-col justify-center"

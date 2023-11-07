@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import {
-  getWordListBookmarkActive,
-  getWordListBookmarkEnWordOrderActive,
-  getWordListBookmarkKrWordOrderActive,
+  fetchWordListBookmarkAPI,
+  fetchWordListBookmarkEnWordOrderAPI,
+  fetchWordListBookmarkKrWordOrderAPI,
 } from "../service/word";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
@@ -24,15 +24,15 @@ export default function Bookmark() {
     if (value === "order") {
       setOrderSelect("order");
       localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkActive({ writer, setGetWords });
+      fetchWordListBookmarkAPI({ writer, setGetWords });
     } else if (value === "enOrder") {
       setOrderSelect("enOrder");
       localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkEnWordOrderActive({ writer, setGetWords });
+      fetchWordListBookmarkEnWordOrderAPI({ writer, setGetWords });
     } else if (value === "krOrder") {
       setOrderSelect("krOrder");
       localStorage.setItem("bookmarkOrder", JSON.stringify(value));
-      getWordListBookmarkKrWordOrderActive({ writer, setGetWords });
+      fetchWordListBookmarkKrWordOrderAPI({ writer, setGetWords });
     }
   };
 
@@ -78,11 +78,11 @@ export default function Bookmark() {
 
   const { isLoading } = useQuery("getWordBookmark", () => {
     if (localGetOrder === null || localGetOrder === "order") {
-      getWordListBookmarkActive({ writer, setGetWords });
+      fetchWordListBookmarkAPI({ writer, setGetWords });
     } else if (localGetOrder === "enOrder") {
-      getWordListBookmarkEnWordOrderActive({ writer, setGetWords });
+      fetchWordListBookmarkEnWordOrderAPI({ writer, setGetWords });
     } else if (localGetOrder === "krOrder") {
-      getWordListBookmarkKrWordOrderActive({ writer, setGetWords });
+      fetchWordListBookmarkKrWordOrderAPI({ writer, setGetWords });
     }
   });
 

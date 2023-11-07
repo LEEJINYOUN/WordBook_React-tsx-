@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import AddWordModalForm from "./AddWordModalForm";
-import { wordCheckActive } from "../service/word";
+import { wordCheckAPI } from "../service/word";
 import { AddWordModalType } from "../types/type";
 
 export default function AddWordModal({
@@ -28,7 +28,7 @@ export default function AddWordModal({
     e.preventDefault();
     const bookmark = false;
     if (krWord.trim() !== "") {
-      wordCheckActive({
+      wordCheckAPI({
         writer,
         enWord,
         setEnWord,

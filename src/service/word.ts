@@ -1,13 +1,13 @@
 import {
-  AddWordCheckType,
+  AddWordCheckAPIType,
   AddWordObjectType,
+  FetchWordsListAPIType,
   GetRecordsListActiveType,
-  GetWordsListType,
 } from "./sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
 
-export async function addWordActive({
+export async function addWordAPI({
   writer,
   enWord,
   krWord,
@@ -29,13 +29,13 @@ export async function addWordActive({
     });
 }
 
-export async function wordCheckActive({
+export async function wordCheckAPI({
   writer,
   enWord,
   krWord,
   bookmark,
   today,
-}: AddWordCheckType) {
+}: AddWordCheckAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && enWord == "${enWord}"]`
@@ -43,14 +43,14 @@ export async function wordCheckActive({
     .then((res) =>
       res[0] !== undefined
         ? alert("이미 등록된 단어입니다")
-        : addWordActive({ writer, enWord, krWord, bookmark, today })
+        : addWordAPI({ writer, enWord, krWord, bookmark, today })
     );
 }
 
-export async function getWordListActive({
+export async function fetchWordListAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}"] | order(today asc)
@@ -61,10 +61,10 @@ export async function getWordListActive({
     });
 }
 
-export async function getWordListEnWordOrderActive({
+export async function fetchWordListEnWordOrderAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}"] | order(enWord asc)
@@ -75,10 +75,10 @@ export async function getWordListEnWordOrderActive({
     });
 }
 
-export async function getWordListKrWordOrderActive({
+export async function fetchWordListKrWordOrderAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}"] | order(krWord asc)
@@ -89,10 +89,10 @@ export async function getWordListKrWordOrderActive({
     });
 }
 
-export async function getWordListBookmarkActive({
+export async function fetchWordListBookmarkAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(today asc)
@@ -103,10 +103,10 @@ export async function getWordListBookmarkActive({
     });
 }
 
-export async function getWordListBookmarkEnWordOrderActive({
+export async function fetchWordListBookmarkEnWordOrderAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(enWord asc)
@@ -117,10 +117,10 @@ export async function getWordListBookmarkEnWordOrderActive({
     });
 }
 
-export async function getWordListBookmarkKrWordOrderActive({
+export async function fetchWordListBookmarkKrWordOrderAPI({
   writer,
   setGetWords,
-}: GetWordsListType) {
+}: FetchWordsListAPIType) {
   return client
     .fetch(
       `*[_type == "word" && writer == "${writer}" && bookmark == true] | order(krWord asc)
@@ -131,7 +131,7 @@ export async function getWordListBookmarkKrWordOrderActive({
     });
 }
 
-export async function wordBookmarkTrueActive({ id }: { id: string }) {
+export async function wordBookmarkTrueAPI({ id }: { id: string }) {
   return client
     .patch(id)
     .set({ bookmark: true })
@@ -141,7 +141,7 @@ export async function wordBookmarkTrueActive({ id }: { id: string }) {
     });
 }
 
-export async function wordBookmarkFalseActive({ id }: { id: string }) {
+export async function wordBookmarkFalseAPI({ id }: { id: string }) {
   return client
     .patch(id)
     .set({ bookmark: false })
@@ -151,18 +151,18 @@ export async function wordBookmarkFalseActive({ id }: { id: string }) {
     });
 }
 
-export async function wordBookmarkCheckActive({ id }: { id: string }) {
+export async function wordBookmarkCheckAPI({ id }: { id: string }) {
   return client.fetch(`*[_type == "word" && _id == "${id}"]`).then((res) => {
     let isBookmark = res[0].bookmark;
     if (isBookmark === false) {
-      wordBookmarkTrueActive({ id });
+      wordBookmarkTrueAPI({ id });
     } else {
-      wordBookmarkFalseActive({ id });
+      wordBookmarkFalseAPI({ id });
     }
   });
 }
 
-export async function wordDeleteActive({ id }: { id: string }) {
+export async function wordDeleteAPI({ id }: { id: string }) {
   return client
     .delete({ query: `*[_type == "word" && _id == "${id}"]` })
     .then(() => window.location.reload());
