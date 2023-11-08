@@ -1,6 +1,10 @@
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
-import { DateRecordAPIType, QuizStopType, ResultPushType } from "./sanityTypes";
+import {
+  DateRecordAPIType,
+  QuizStopType,
+  ResultPushType,
+} from "../types/sanityTypes";
 
 export async function resultPushAPI({
   writer,

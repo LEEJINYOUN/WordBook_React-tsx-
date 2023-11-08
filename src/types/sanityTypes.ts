@@ -1,8 +1,4 @@
-import {
-  AuthUserInfoType,
-  NavigateType,
-  QuizResultArrType,
-} from "../types/type";
+import { AuthUserInfoType, NavigateType, QuizResultArrType } from "./type";
 
 export interface EmailSignUpType extends NavigateType {
   email: string;

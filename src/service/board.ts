@@ -2,7 +2,7 @@ import {
   AddBoardAPIType,
   FetchBoardReadAPIType,
   FetchBoardsListAPIType,
-} from "./sanityTypes";
+} from "../types/sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
 
