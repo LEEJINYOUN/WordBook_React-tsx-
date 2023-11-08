@@ -1,12 +1,12 @@
 export type NavigateType = any;
 export type CssType = string;
 export type NavbarType = any;
-export type UserInfoType = {
+export interface UserInfoType {
   id: string;
   email: string;
   nickname: string;
   name: string;
-};
+}
 
 export interface GoToAuthType {
   to: string;
@@ -40,10 +40,10 @@ export interface OnClickType {
   id: string;
 }
 
-export type SearchFormType = {
+export interface SearchFormType {
   searchWord: string;
   onSearchChange: React.ChangeEventHandler;
-};
+}
 
 export interface AddWordModalType {
   onAddModal: any;
@@ -64,10 +64,10 @@ export interface QuizType extends RegisterType {
   navigate: any;
 }
 
-export type WordObjectType = {
+export interface WordObjectType {
   enWord: string;
   krWord: string;
-};
+}
 
 export interface QuizResultArrType {
   MATCH_ARR: WordObjectType[];
@@ -111,22 +111,22 @@ export interface CurrentRecordModalType extends QuizResultArrType {
   onCurrentRecordClose: () => void;
 }
 
-export type ItemType = {
+export interface ItemType {
   _id: string;
   today: string;
-};
+}
 
-export type RecordsReadModalType = {
+export interface RecordsReadModalType {
   getRecords: ItemType[];
   onDateRecord: any;
   onRecordsReadClose: () => void;
-};
+}
 
-export type RecordDateModalType = {
+export interface RecordDateModalType {
   getRecordDateMatched: Array<any>;
   getRecordDateNotMatched: Array<any>;
   onCurrentRecordClose: () => void;
-};
+}
 
 export interface ProfileType {
   navigate: any;
@@ -137,58 +137,58 @@ export interface WithdrawalModalType {
   navigate: any;
 }
 
-export type WordbookTopType = {
+export interface WordbookTopType {
   searchWord: string;
   onSearchChange: React.ChangeEventHandler;
   localGetOrder: any;
   onOrderSelected: any;
-};
+}
 
-export type WordbookItemLeftType = {
+export interface WordbookItemLeftType {
   itemKey: any;
   enWord: string;
   krWord: string;
-};
+}
 
 export interface WordbookItemRightType {
   bookmark: boolean;
   id: string;
 }
 
-export type OnBoardReadType = {
+export interface OnBoardReadType {
   e: React.MouseEvent<HTMLDivElement, MouseEvent>;
   id: string;
-};
+}
 
-export type OnDeleteBoardType = {
+export interface OnDeleteBoardType {
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>;
   id: string;
-};
+}
 
-export type BoardTopType = {
+export interface BoardTopType {
   onSearchBoardChange: React.ChangeEventHandler;
   searchBoard: string;
   onCategorySelected: any;
-};
+}
 
 export interface BoardSearchFormType {
   onSearchBoardChange: React.ChangeEventHandler;
   searchBoard: string;
 }
 
-export type AddBoardModalType = {
+export interface AddBoardModalType {
   writer: string | undefined;
   onAddBoardModalToggle: () => void;
-};
+}
 
-export type BoardReadModalType = {
+export interface BoardReadModalType {
   setBoardReadModal: React.Dispatch<React.SetStateAction<boolean>>;
   boardRead: any[];
   writer: string | undefined;
-};
+}
 
-export type BoardPaginationType = {
+export interface BoardPaginationType {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pages: number[];
-};
+}

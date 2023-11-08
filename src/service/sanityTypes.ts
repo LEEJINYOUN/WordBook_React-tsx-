@@ -32,57 +32,57 @@ export interface AddWordCheckAPIType extends AddWordObjectType {
   setKrWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export type FetchWordsListAPIType = {
+export interface FetchWordsListAPIType {
   writer: string | undefined;
   setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
-};
+}
 
-export type QuizGetWordsListType = {
+export interface QuizGetWordsListType {
   writer: string | undefined;
   setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
-};
+}
 
-export type FetchRecordsListAPIType = {
+export interface FetchRecordsListAPIType {
   writer: string | undefined;
   setGetRecords: React.Dispatch<React.SetStateAction<any[]>>;
-};
+}
 
 export interface ResultPushType extends QuizResultArrType {
   writer: string | undefined;
   today: string;
 }
 
-export type DateRecordAPIType = {
+export interface DateRecordAPIType {
   id: string;
   setGetRecordDateMatched: React.Dispatch<React.SetStateAction<Array<any>>>;
   setGetRecordDateNotMatched: React.Dispatch<React.SetStateAction<Array<any>>>;
   setGetRecordDate: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 export interface QuizStopType extends ResultPushType {
   setQuizEnd: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export type AuthDeleteType = {
+export interface AuthDeleteType {
   email: string | undefined;
   setCurrentUser: React.Dispatch<React.SetStateAction<AuthUserInfoType | null>>;
   navigate: any;
-};
+}
 
-export type AddBoardAPIType = {
+export interface AddBoardAPIType {
   writer: string | undefined;
   category: string;
   title: string;
   content: string;
   today: string;
-};
+}
 
-export type FetchBoardsListAPIType = {
+export interface FetchBoardsListAPIType {
   setGetBoards: React.Dispatch<React.SetStateAction<any[]>>;
-};
+}
 
-export type FetchBoardReadAPIType = {
+export interface FetchBoardReadAPIType {
   id: string;
   setBoardRead: React.Dispatch<React.SetStateAction<any[]>>;
   setBoardReadModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}

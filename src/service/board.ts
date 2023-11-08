@@ -33,7 +33,7 @@ export async function fetchBoardsListAPI({
 }: FetchBoardsListAPIType) {
   return client
     .fetch(
-      `*[_type == "board"] | order(today desc)
+      `*[_type == "board"] | order(_updatedAt desc)
     `
     )
     .then((res) => {
@@ -46,7 +46,7 @@ export async function fetchBoardsListQuestionAPI({
 }: FetchBoardsListAPIType) {
   return client
     .fetch(
-      `*[_type == "board"  && category == "질문"] | order(today desc)
+      `*[_type == "board"  && category == "질문"] | order(_updatedAt desc)
     `
     )
     .then((res) => {
@@ -59,7 +59,7 @@ export async function fetchBoardsListShareAPI({
 }: FetchBoardsListAPIType) {
   return client
     .fetch(
-      `*[_type == "board"  && category == "공유"] | order(today desc)
+      `*[_type == "board"  && category == "공유"] | order(_updatedAt desc)
     `
     )
     .then((res) => {
