@@ -1,6 +1,6 @@
-import { BooleanChangeType } from "../types/type";
+import { ButtonChangeType } from "../types/type";
 
-export default function UseModal({ booleanChange }: BooleanChangeType) {
+export default function UseModal({ buttonChange }: ButtonChangeType) {
   return (
     <div className="z-50 absolute top-0 left-0 w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[60%] rounded-2xl">
@@ -15,7 +15,7 @@ export default function UseModal({ booleanChange }: BooleanChangeType) {
           <button
             className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
             id="use"
-            onClick={booleanChange}
+            onClick={buttonChange}
           >
             닫기
           </button>

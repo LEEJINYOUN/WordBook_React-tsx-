@@ -1,34 +1,24 @@
 import React, { useContext, useState } from "react";
 import QuizMainForm from "../components/QuizMainForm";
-import { fetchWordListAPI, getRecordsListActive } from "../service/word";
+import { fetchRecordsListAPI, fetchWordListAPI } from "../service/word";
 import RecordsReadModal from "../components/RecordsReadModal";
 import QuizWaitForm from "../components/QuizWaitForm";
 import UseModal from "../components/UseModal";
 import QuizForm from "../components/QuizForm";
-import {
-  resultPushActive,
-  dateRecordActive,
-  quizStopActive,
-} from "../service/quiz";
+import { dateRecordAPI, quizStopAPI, resultPushAPI } from "../service/quiz";
 import { v4 as uuidv4 } from "uuid";
 import QuizEndModal from "../components/QuizEndModal";
 import CurrentRecordModal from "../components/CurrentRecordModal";
 import RecordDateModal from "../components/RecordDateModal";
 import { useQuery } from "react-query";
 import spinner from "../assets/spinner.gif";
-import {
-  AnswersType,
-  OnClickType,
-  QuizType,
-  WordObjectType,
-} from "../types/type";
+import { AnswersType, OnClickType, QuizType } from "../types/type";
 import { AuthContext } from "../utils/AuthContext";
 import Navbar from "../components/Navbar";
+import { MATCH_ARR, NOT_MATCH_ARR } from "../constants/QuizConstant";
+import { getFormatDate } from "../hooks/GetToday";
 
-let INDEX = 0;
-const WORDS = 5;
-let matchedArr: WordObjectType[] = [];
-let NotMatchedArr: WordObjectType[] = [];
+let QUIZ_INDEX = 0;
 
 export default function Quiz({
   inputMainCss,
@@ -37,26 +27,20 @@ export default function Quiz({
 }: QuizType) {
   const userContext = useContext(AuthContext);
   const writer = userContext.currentUser?.email;
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  const day = ("0" + now.getDate()).slice(-2);
-  const hours = ("0" + now.getHours()).slice(-2);
-  const minutes = ("0" + now.getMinutes()).slice(-2);
-  const today = year + "." + month + "." + day + " " + hours + ":" + minutes;
+  const today = getFormatDate(new Date());
   const [getWords, setGetWords] = useState<Array<any>>([]);
   const [question, setQuestion] = useState<Array<any>>([]);
   const [answer, setAnswer] = useState<string>("");
-  const [btnMatch, setBtnMatch] = useState<boolean>(false);
-  const [btnStart, setBtnStart] = useState<boolean>(false);
-  const [btnUse, setBtnUse] = useState<boolean>(false);
-  const [matched, setMatched] = useState<boolean>(false);
-  const [notMatched, setNotMatched] = useState<boolean>(false);
-  const [quizEnd, setQuizEnd] = useState<boolean>(false);
-  const [currentRecord, setCurrentRecord] = useState<boolean>(false);
-  const [recordsRead, setRecordsRead] = useState<boolean>(false);
+  const [btnMatch, setBtnMatch] = useState(false);
+  const [btnStart, setBtnStart] = useState(false);
+  const [btnUse, setBtnUse] = useState(false);
+  const [matched, setMatched] = useState(false);
+  const [notMatched, setNotMatched] = useState(false);
+  const [quizEnd, setQuizEnd] = useState(false);
+  const [currentRecord, setCurrentRecord] = useState(false);
+  const [recordsRead, setRecordsRead] = useState(false);
   const [getRecords, setGetRecords] = useState<Array<any>>([]);
-  const [getRecordDate, setGetRecordDate] = useState<boolean>(false);
+  const [getRecordDate, setGetRecordDate] = useState(false);
   const [getRecordDateMatched, setGetRecordDateMatched] = useState<Array<any>>(
     []
   );
@@ -64,21 +48,25 @@ export default function Quiz({
     Array<any>
   >([]);
 
-  const onShuffle = () => {
+  const quizShuffle = () => {
     const shuffledArray = [...getWords].sort(() => Math.random() - 0.5);
     setQuestion(shuffledArray);
   };
 
-  const booleanChange = (e: any) => {
+  const quizInit = () => {
+    QUIZ_INDEX = 0;
+    MATCH_ARR.length = 0;
+    NOT_MATCH_ARR.length = 0;
+  };
+
+  const buttonChange = (e: any) => {
     let id = e.target.id;
     if (id === "match" || id === "select") {
       setBtnMatch((prev) => !prev);
     } else if (id === "start") {
       setBtnStart((prev) => !prev);
-      onShuffle();
-      INDEX = 0;
-      matchedArr.length = 0;
-      NotMatchedArr.length = 0;
+      quizShuffle();
+      quizInit();
     } else if (id === "use") {
       setBtnUse((prev) => !prev);
     }
@@ -87,10 +75,10 @@ export default function Quiz({
   const resultPush = async ({
     writer,
     today,
-    matchedArr,
-    NotMatchedArr,
+    MATCH_ARR,
+    NOT_MATCH_ARR,
   }: AnswersType) => {
-    resultPushActive({ matchedArr, NotMatchedArr, today, writer });
+    resultPushAPI({ MATCH_ARR, NOT_MATCH_ARR, today, writer });
   };
 
   const matchedAnswer = () => {
@@ -98,13 +86,13 @@ export default function Quiz({
     setMatched(true);
     let matchedQuestion = {
       _key: uuidv4(),
-      enWord: question[INDEX].enWord,
-      krWord: question[INDEX].krWord,
+      enWord: question[QUIZ_INDEX].enWord,
+      krWord: question[QUIZ_INDEX].krWord,
     };
-    matchedArr.push(matchedQuestion);
+    MATCH_ARR.push(matchedQuestion);
     setTimeout(() => {
       setMatched(false);
-      INDEX++;
+      QUIZ_INDEX++;
     }, 1000);
   };
 
@@ -113,13 +101,13 @@ export default function Quiz({
     setNotMatched(true);
     let notMatchedQuestion = {
       _key: uuidv4(),
-      enWord: question[INDEX].enWord,
-      krWord: question[INDEX].krWord,
+      enWord: question[QUIZ_INDEX].enWord,
+      krWord: question[QUIZ_INDEX].krWord,
     };
-    NotMatchedArr.push(notMatchedQuestion);
+    NOT_MATCH_ARR.push(notMatchedQuestion);
     setTimeout(() => {
       setNotMatched(false);
-      INDEX++;
+      QUIZ_INDEX++;
     }, 1000);
   };
 
@@ -128,10 +116,10 @@ export default function Quiz({
     setMatched(true);
     let matchedQuestion = {
       _key: uuidv4(),
-      enWord: question[INDEX].enWord,
-      krWord: question[INDEX].krWord,
+      enWord: question[QUIZ_INDEX].enWord,
+      krWord: question[QUIZ_INDEX].krWord,
     };
-    matchedArr.push(matchedQuestion);
+    MATCH_ARR.push(matchedQuestion);
     setTimeout(() => {
       setMatched(false);
       setQuizEnd(true);
@@ -143,10 +131,10 @@ export default function Quiz({
     setNotMatched(true);
     let notMatchedQuestion = {
       _key: uuidv4(),
-      enWord: question[INDEX].enWord,
-      krWord: question[INDEX].krWord,
+      enWord: question[QUIZ_INDEX].enWord,
+      krWord: question[QUIZ_INDEX].krWord,
     };
-    NotMatchedArr.push(notMatchedQuestion);
+    NOT_MATCH_ARR.push(notMatchedQuestion);
     setTimeout(() => {
       setNotMatched(false);
       setQuizEnd(true);
@@ -155,24 +143,24 @@ export default function Quiz({
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (INDEX + 1 !== question.length) {
-      if (question[INDEX].enWord === answer) {
+    if (QUIZ_INDEX + 1 !== question.length) {
+      if (question[QUIZ_INDEX].enWord === answer) {
         matchedAnswer();
       } else {
         NotMatchedAnswer();
       }
     } else {
-      if (question[INDEX].enWord === answer) {
+      if (question[QUIZ_INDEX].enWord === answer) {
         matchedEndAnswer();
       } else {
         NotMatchedEndAnswer();
       }
-      resultPush({ writer, today, matchedArr, NotMatchedArr });
+      resultPush({ writer, today, MATCH_ARR, NOT_MATCH_ARR });
     }
   };
 
   const quizStopBtn = async () => {
-    quizStopActive({ today, writer, matchedArr, NotMatchedArr, setQuizEnd });
+    quizStopAPI({ today, writer, MATCH_ARR, NOT_MATCH_ARR, setQuizEnd });
   };
 
   const onCurrentRecord = () => {
@@ -190,7 +178,7 @@ export default function Quiz({
 
   const onDateRecord = async ({ e, id }: OnClickType) => {
     e.preventDefault();
-    dateRecordActive({
+    dateRecordAPI({
       id,
       setGetRecordDateMatched,
       setGetRecordDateNotMatched,
@@ -204,7 +192,7 @@ export default function Quiz({
 
   const { isLoading } = useQuery("getLists", () => {
     fetchWordListAPI({ writer, setGetWords });
-    getRecordsListActive({ writer, setGetRecords });
+    fetchRecordsListAPI({ writer, setGetRecords });
   });
 
   return (
@@ -220,17 +208,16 @@ export default function Quiz({
             <main className="h-[90%] flex flex-col justify-center items-center">
               {btnMatch === false ? (
                 <QuizMainForm
-                  WORDS={WORDS}
                   getWords={getWords}
-                  booleanChange={booleanChange}
+                  buttonChange={buttonChange}
                   onRecordsRead={onRecordsRead}
                 />
               ) : btnStart === false ? (
-                <QuizWaitForm booleanChange={booleanChange} />
+                <QuizWaitForm buttonChange={buttonChange} />
               ) : (
                 <QuizForm
                   btnStart={btnStart}
-                  INDEX={INDEX}
+                  QUIZ_INDEX={QUIZ_INDEX}
                   question={question}
                   matched={matched}
                   notMatched={notMatched}
@@ -240,24 +227,24 @@ export default function Quiz({
                   answer={answer}
                   setAnswer={setAnswer}
                   quizStopBtn={quizStopBtn}
-                  booleanChange={booleanChange}
+                  buttonChange={buttonChange}
                 />
               )}
             </main>
-            {btnUse === true && <UseModal booleanChange={booleanChange} />}
+            {btnUse === true && <UseModal buttonChange={buttonChange} />}
             {quizEnd === true && (
               <QuizEndModal
                 getWords={getWords}
-                matchedArr={matchedArr}
-                NotMatchedArr={NotMatchedArr}
+                MATCH_ARR={MATCH_ARR}
+                NOT_MATCH_ARR={NOT_MATCH_ARR}
                 onCurrentRecord={onCurrentRecord}
                 navigate={navigate}
               />
             )}
             {currentRecord === true && (
               <CurrentRecordModal
-                matchedArr={matchedArr}
-                NotMatchedArr={NotMatchedArr}
+                MATCH_ARR={MATCH_ARR}
+                NOT_MATCH_ARR={NOT_MATCH_ARR}
                 onCurrentRecordClose={onCurrentRecordClose}
               />
             )}

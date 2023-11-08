@@ -2,8 +2,8 @@ import { QuizEndModalType } from "../types/type";
 
 export default function QuizEndModal({
   getWords,
-  matchedArr,
-  NotMatchedArr,
+  MATCH_ARR,
+  NOT_MATCH_ARR,
   onCurrentRecord,
   navigate,
 }: QuizEndModalType) {
@@ -33,7 +33,7 @@ export default function QuizEndModal({
                 맞춘 문제
               </div>
               <div className="h-[50%] text-2xl font-extrabold flex justify-center items-center">
-                {matchedArr.length}
+                {MATCH_ARR.length}
               </div>
             </div>
             <div className="w-[120px]">
@@ -41,7 +41,7 @@ export default function QuizEndModal({
                 틀린 문제
               </div>
               <div className="h-[50%] text-2xl font-extrabold flex justify-center items-center">
-                {NotMatchedArr.length}
+                {NOT_MATCH_ARR.length}
               </div>
             </div>
           </div>

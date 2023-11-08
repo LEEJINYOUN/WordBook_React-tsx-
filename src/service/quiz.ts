@@ -1,12 +1,12 @@
-import { DateRecordType, QuizStopType, ResultPushType } from "./sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
+import { DateRecordAPIType, QuizStopType, ResultPushType } from "./sanityTypes";
 
-export async function resultPushActive({
+export async function resultPushAPI({
   writer,
   today,
-  matchedArr,
-  NotMatchedArr,
+  MATCH_ARR,
+  NOT_MATCH_ARR,
 }: ResultPushType) {
   return client
     .createIfNotExists({
@@ -14,18 +14,18 @@ export async function resultPushActive({
       _type: "quiz",
       writer,
       today,
-      matched: matchedArr,
-      notMatched: NotMatchedArr,
+      matched: MATCH_ARR,
+      notMatched: NOT_MATCH_ARR,
     })
     .then(() => {});
 }
 
-export async function dateRecordActive({
+export async function dateRecordAPI({
   id,
   setGetRecordDateMatched,
   setGetRecordDateNotMatched,
   setGetRecordDate,
-}: DateRecordType) {
+}: DateRecordAPIType) {
   return client
     .fetch(
       `*[_type == "quiz" && _id == "${id}"]
@@ -38,11 +38,11 @@ export async function dateRecordActive({
     });
 }
 
-export async function quizStopActive({
+export async function quizStopAPI({
   today,
   writer,
-  matchedArr,
-  NotMatchedArr,
+  MATCH_ARR,
+  NOT_MATCH_ARR,
   setQuizEnd,
 }: QuizStopType) {
   return client
@@ -51,8 +51,8 @@ export async function quizStopActive({
       _type: "quiz",
       writer,
       today,
-      matched: matchedArr,
-      notMatched: NotMatchedArr,
+      matched: MATCH_ARR,
+      notMatched: NOT_MATCH_ARR,
     })
     .then(() => {
       setQuizEnd(true);

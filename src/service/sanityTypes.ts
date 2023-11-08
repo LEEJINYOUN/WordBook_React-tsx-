@@ -1,4 +1,8 @@
-import { AuthUserInfoType, NavigateType } from "../types/type";
+import {
+  AuthUserInfoType,
+  NavigateType,
+  QuizResultArrType,
+} from "../types/type";
 
 export interface EmailSignUpType extends NavigateType {
   email: string;
@@ -38,19 +42,17 @@ export type QuizGetWordsListType = {
   setGetWords: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export type GetRecordsListActiveType = {
+export type FetchRecordsListAPIType = {
   writer: string | undefined;
   setGetRecords: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export interface ResultPushType {
+export interface ResultPushType extends QuizResultArrType {
   writer: string | undefined;
   today: string;
-  matchedArr: object[];
-  NotMatchedArr: object[];
 }
 
-export type DateRecordType = {
+export type DateRecordAPIType = {
   id: string;
   setGetRecordDateMatched: React.Dispatch<React.SetStateAction<Array<any>>>;
   setGetRecordDateNotMatched: React.Dispatch<React.SetStateAction<Array<any>>>;

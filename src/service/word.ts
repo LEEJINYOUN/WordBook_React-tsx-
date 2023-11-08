@@ -1,8 +1,8 @@
 import {
   AddWordCheckAPIType,
   AddWordObjectType,
+  FetchRecordsListAPIType,
   FetchWordsListAPIType,
-  GetRecordsListActiveType,
 } from "./sanityTypes";
 import { client } from "./sanityInit";
 import { v4 as uuidv4 } from "uuid";
@@ -168,10 +168,10 @@ export async function wordDeleteAPI({ id }: { id: string }) {
     .then(() => window.location.reload());
 }
 
-export async function getRecordsListActive({
+export async function fetchRecordsListAPI({
   writer,
   setGetRecords,
-}: GetRecordsListActiveType) {
+}: FetchRecordsListAPIType) {
   return client
     .fetch(
       `*[_type == "quiz" && writer == "${writer}"] | order(today desc)

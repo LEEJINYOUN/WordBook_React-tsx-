@@ -1,12 +1,13 @@
+import { WORDS } from "../constants/QuizConstant";
 import { QuizMainFormType } from "../types/type";
 
 export default function QuizMainForm({
-  WORDS,
   getWords,
-  booleanChange,
+  buttonChange,
   onRecordsRead,
 }: QuizMainFormType) {
   const btnMatchCss = `w-[130px] h-[50px] rounded-xl flex justify-center items-center my-4 font-semibold text-base sm:text-lg text-white`;
+
   return (
     <div className="w-full h-full flex flex-col items-center">
       <div className="w-full h-[30%] flex justify-center items-center font-bold text-red-400 text-base sm:text-lg">
@@ -21,7 +22,7 @@ export default function QuizMainForm({
           }
           id="match"
           disabled={getWords.length > WORDS - 1 ? false : true}
-          onClick={(e) => booleanChange(e)}
+          onClick={(e) => buttonChange(e)}
         >
           단어 맞추기
         </button>

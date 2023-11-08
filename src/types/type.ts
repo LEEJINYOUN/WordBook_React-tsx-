@@ -69,23 +69,28 @@ export type WordObjectType = {
   krWord: string;
 };
 
-export type AnswersType = {
+export interface QuizResultArrType {
+  MATCH_ARR: WordObjectType[];
+  NOT_MATCH_ARR: WordObjectType[];
+}
+
+export interface AnswersType extends QuizResultArrType {
   writer: string | undefined;
   today: string;
-  matchedArr: WordObjectType[];
-  NotMatchedArr: WordObjectType[];
-};
+}
 
-export type QuizMainFormType = {
-  WORDS: number;
+export interface ButtonChangeType {
+  buttonChange: any;
+}
+
+export interface QuizMainFormType extends ButtonChangeType {
   getWords: Array<any>[];
-  booleanChange: any;
   onRecordsRead: () => void;
-};
+}
 
-export type QuizFormType = {
+export interface QuizFormType extends ButtonChangeType {
   btnStart: boolean;
-  INDEX: number;
+  QUIZ_INDEX: number;
   question: Array<WordObjectType>;
   matched: boolean;
   notMatched: boolean;
@@ -95,21 +100,16 @@ export type QuizFormType = {
   answer: string;
   setAnswer: React.Dispatch<React.SetStateAction<string>>;
   quizStopBtn: () => void;
-  booleanChange: any;
-};
+}
 
-export interface QuizEndModalType extends NavbarType {
+export interface QuizEndModalType extends NavbarType, QuizResultArrType {
   getWords: Array<any>[];
-  matchedArr: object[];
-  NotMatchedArr: object[];
   onCurrentRecord: () => void;
 }
 
-export type CurrentRecordModalType = {
-  matchedArr: WordObjectType[];
-  NotMatchedArr: WordObjectType[];
+export interface CurrentRecordModalType extends QuizResultArrType {
   onCurrentRecordClose: () => void;
-};
+}
 
 export type ItemType = {
   _id: string;
@@ -131,10 +131,6 @@ export type RecordDateModalType = {
 export interface ProfileType {
   navigate: any;
 }
-
-export type BooleanChangeType = {
-  booleanChange: any;
-};
 
 export interface WithdrawalModalType {
   modalToggle: () => void;

@@ -4,7 +4,7 @@ import { QuizFormType } from "../types/type";
 
 export default function QuizForm({
   btnStart,
-  INDEX,
+  QUIZ_INDEX,
   question,
   matched,
   notMatched,
@@ -14,7 +14,7 @@ export default function QuizForm({
   answer,
   setAnswer,
   quizStopBtn,
-  booleanChange,
+  buttonChange,
 }: QuizFormType) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -24,6 +24,7 @@ export default function QuizForm({
       setAnswer(value.replace(/[^A-Za-z]/g, "").toLowerCase());
     }
   };
+
   return (
     <>
       <div className="border-b-2 border-gray-200 mx-auto w-full h-[90%] flex justify-center items-center">
@@ -31,11 +32,11 @@ export default function QuizForm({
           <div className="w-[90%] h-[80%] rounded-xl">
             <div className="h-[10%] flex justify-center">
               <span className="w-[50px] flex justify-center items-center font-semibold text-xl">
-                {INDEX + 1} / {question.length}
+                {QUIZ_INDEX + 1} / {question.length}
               </span>
             </div>
             <div className="h-[60%] flex justify-center items-center text-2xl font-bold">
-              {question[INDEX].krWord}
+              {question[QUIZ_INDEX].krWord}
             </div>
             <form
               onSubmit={
@@ -89,7 +90,7 @@ export default function QuizForm({
         <button
           className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
           id="use"
-          onClick={booleanChange}
+          onClick={buttonChange}
         >
           이용방법
         </button>

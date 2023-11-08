@@ -1,13 +1,14 @@
 import { CurrentRecordModalType } from "../types/type";
 
 export default function CurrentRecordModal({
-  matchedArr,
-  NotMatchedArr,
+  MATCH_ARR,
+  NOT_MATCH_ARR,
   onCurrentRecordClose,
 }: CurrentRecordModalType) {
   const carsCss = `border flex justify-center items-center text-center mx-auto my-4 w-[85%] h-[70px] rounded-xl`;
   const wordsCss = `w-[90%] h-full`;
   const wordCss = `w-full h-[50%] flex justify-center items-center text-lg font-semibold"`;
+
   return (
     <div className="z-120 absolute top-0 left-0 w-full h-full rounded-2xl bg-black/40 flex">
       <div className="bg-white m-auto w-[90%] h-[70%] rounded-2xl">
@@ -17,7 +18,7 @@ export default function CurrentRecordModal({
           </div>
         </div>
         <div className="h-[80%] border-b-2 border-gray-200 overflow-y-auto scrollbar-hide">
-          {matchedArr.map((item, key) => {
+          {MATCH_ARR.map((item, key) => {
             return (
               <div
                 key={key}
@@ -30,7 +31,7 @@ export default function CurrentRecordModal({
               </div>
             );
           })}
-          {NotMatchedArr.map((item, key) => {
+          {NOT_MATCH_ARR.map((item, key) => {
             return (
               <div
                 key={key}

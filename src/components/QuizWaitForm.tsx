@@ -1,6 +1,6 @@
-import { BooleanChangeType } from "../types/type";
+import { ButtonChangeType } from "../types/type";
 
-export default function QuizWaitForm({ booleanChange }: BooleanChangeType) {
+export default function QuizWaitForm({ buttonChange }: ButtonChangeType) {
   return (
     <>
       <div className="border-b-2 border-gray-200 mx-auto w-full h-[90%] flex justify-center items-center font-bold text-xl">
@@ -10,21 +10,21 @@ export default function QuizWaitForm({ booleanChange }: BooleanChangeType) {
         <button
           className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
           id="select"
-          onClick={booleanChange}
+          onClick={buttonChange}
         >
           뒤로가기
         </button>
         <button
           className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
           id="start"
-          onClick={booleanChange}
+          onClick={buttonChange}
         >
           시작
         </button>
         <button
           className="bg-blue-300 w-[100px] h-10 text-white rounded-lg hover:bg-blue-400 hover:font-bold duration-200"
           id="use"
-          onClick={booleanChange}
+          onClick={buttonChange}
         >
           이용방법
         </button>
